@@ -14,4 +14,10 @@ FactoryGirl.define do
     email
     password 'please'
   end
+
+  factory :room do
+    title 'Room 1'
+    context 'this is test room.'
+    user
+  end
 end
