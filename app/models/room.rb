@@ -7,4 +7,8 @@ class Room
   field :context, :type => String
   field :static, :type => Boolean, :default => false
   field :closed_at, :type => DateTime
+  attr_protected :user
+
+  belongs_to :user
+  validates_presence_of :title, :user
 end
