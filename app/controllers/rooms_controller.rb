@@ -58,7 +58,6 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
-    pp @room
     respond_with @room
   end
 end
