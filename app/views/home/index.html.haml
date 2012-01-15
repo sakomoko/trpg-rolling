@@ -1,5 +1,5 @@
 %h3 Home#index
 %p Find me in app/views/home/index.html.haml
 - @users.each do |user|
-  %p= "User: " + user.name
+  %p= link_to(user.name, user)
 
