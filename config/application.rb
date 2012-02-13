@@ -52,6 +52,8 @@ module TrpgRolling
     config.assets.version = '1.0'
 
     config.generators do |g|
+      g.test_framework :rspec, :fixture => true, :fixture_replacement => :factory_girl
+      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
       g.view_specs false
       g.helper_specs false
     end
