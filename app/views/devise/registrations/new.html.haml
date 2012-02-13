@@ -1,21 +1,16 @@
 %h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :builder => BootstrapFormBuilder) do |f|
   %div
-    = f.label :name
-    %br/
-    = f.text_field :name
+    = f.control_group :name do
+      = f.text_field :name
   %div
-    = f.label :email
-    %br/
-    = f.email_field :email
+    = f.control_group :email do
+      = f.email_field :email
   %div
-    = f.label :password
-    %br/
-    = f.password_field :password
+    = f.control_group :password do
+      = f.password_field :password
   %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div= f.submit "Sign up"
+    = f.control_group :password_confirmation do
+      = f.password_field :password_confirmation
+  %div= f.submit "Sign up", :class => "btn"
 = render :partial => "devise/shared/links"

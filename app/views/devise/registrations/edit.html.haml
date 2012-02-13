@@ -1,31 +1,30 @@
 %h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-  = devise_error_messages!
-  %div
-    = f.label :name
-    %br/
-    = f.text_field :name
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %div
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password
-  %div= f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
-= link_to "Back", :back
+  ユーザー情報の編集
+%div
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal'}, :builder => BootstrapFormBuilder) do |f|
+
+    = f.control_group :name do
+      = f.text_field :name
+
+    = f.control_group :email do
+      = f.email_field :email
+
+    = f.control_group :password do
+      = f.password_field :password
+      %p.help-block
+        変更しない場合は空白にしておいて下さい
+
+    = f.control_group :password_confirmation do
+      = f.password_field :password_confirmation
+
+    = f.control_group :current_password do
+      = f.password_field :current_password
+      %p.help-block
+        we need your current password to confirm your changes
+
+    %div.form-actions
+      = f.submit "Update", class: 'btn-warning'
+  %h3 Cancel my account
+  %p
+    Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
+  = link_to "Back", :back
