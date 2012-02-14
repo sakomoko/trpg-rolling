@@ -5,9 +5,17 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @rooms = Room.all.desc :created_at
     respond_with @rooms
   end
+
+  # GET /rooms/closed
+  # GET /rooms/closed.json
+  def closed
+    @rooms = Room.where(closed: true).desc :created_at
+    respond_with @rooms, template: "rooms/index"
+  end
+
 
   # GET /rooms/1
   # GET /rooms/1.json
