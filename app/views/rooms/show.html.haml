@@ -10,15 +10,19 @@
       %soan.label.label-info you
 
   %dt Created
-  %dd= @room.created_at.to_s :db
+  %dd
+    %i.icon-time
+    = @room.created_at.to_s :db
 
 %div.well
   = @room.context.presence || "No Description."
 
 %div.form-actions
+  %a.btn.btn-success{href: "#"}
+    %i.icon-plus-sign.icon-white
+    %b Join Room
   - if @room.user == current_user
     = link_to 'Edit', edit_room_path(@room), class: 'btn'
   = link_to 'Back', rooms_path, class: 'btn'
 
-
-
+%div{id: "room-messages-#{@room.id}"}
