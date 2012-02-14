@@ -1,6 +1,24 @@
-%p#notice= notice
+
+%h2= @room.title
+
+%dl
+  %dt Owner
+  %dd
+    %i.icon-user
+    = link_to @room.user.name, @room.user
+    - if @room.user == current_user
+      %soan.label.label-info you
+
+  %dt Created
+  %dd= @room.created_at.to_s :db
+
+%div.well
+  = @room.context.presence || "No Description."
+
+%div.form-actions
+  - if @room.user == current_user
+    = link_to 'Edit', edit_room_path(@room), class: 'btn'
+  = link_to 'Back', rooms_path, class: 'btn'
 
 
-= link_to 'Edit', edit_room_path(@room)
-\|
-= link_to 'Back', rooms_path
+

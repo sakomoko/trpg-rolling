@@ -1,17 +1,15 @@
 %h1 Listing rooms
 
-%table
+%table.table.table-striped
   %tr
-    %th
-    %th
-    %th
+    %th.span1 #
+    %th title
+    %th created
 
   - @rooms.each do |room|
     %tr
-      %td= link_to 'Show', room
-      %td= link_to 'Edit', edit_room_path(room)
-      %td= link_to 'Destroy', room, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to truncate(room.id.to_s, :length => 10), room
+      %td= link_to room.title, room
+      %td= room.created_at.to_s :db
 
-%br
-
-= link_to 'New Room', new_room_path
+= link_to 'New Room', new_room_path, :class => 'btn btn-primary'
