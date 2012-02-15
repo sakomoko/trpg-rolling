@@ -15,7 +15,7 @@
     = @room.created_at.to_s :db
 
 %div.well
-  = @room.context.presence || "No Description."
+  = @room.description.presence || "No Description."
 
 %div.form-actions
   %a.btn.btn-success{href: "#"}

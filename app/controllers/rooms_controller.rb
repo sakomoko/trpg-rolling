@@ -16,7 +16,6 @@ class RoomsController < ApplicationController
     respond_with @rooms, template: "rooms/index"
   end
 
-
   # GET /rooms/1
   # GET /rooms/1.json
   def show

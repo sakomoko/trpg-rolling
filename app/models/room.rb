@@ -4,7 +4,7 @@ class Room
   include Mongoid::Timestamps
 
   field :title, :type => String
-  field :context, :type => String
+  field :description, :type => String
   field :static, :type => Boolean, :default => false
   field :closed, :type => Boolean, :default => false
   field :closed_at, :type => DateTime
