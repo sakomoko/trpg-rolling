@@ -1,4 +1,5 @@
-require 'factory_girl'
+# Read about factories at http://github.com/thoughtbot/factory_girl
+
 FactoryGirl.define do
 
   sequence :name do |n|
@@ -15,9 +16,4 @@ FactoryGirl.define do
     password 'please'
   end
 
-  factory :room do
-    title 'Room 1'
-    description 'this is test room.'
-    user
-  end
 end
