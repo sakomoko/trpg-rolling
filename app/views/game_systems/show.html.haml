@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @game_system.name
+%p
+  %b Description:
+  = @game_system.description
+
+= link_to 'Edit', edit_game_system_path(@game_system)
+\|
+= link_to 'Back', game_systems_path
