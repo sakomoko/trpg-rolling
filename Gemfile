@@ -42,7 +42,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'growl'
   gem 'webrat'
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 2.6"
   gem 'mongoid-rspec'
   gem 'database_cleaner'
   gem 'factory_girl_rails', :require => false
