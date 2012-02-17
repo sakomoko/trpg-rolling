@@ -1,0 +1,19 @@
+= bootstrap_form_for @world do |f|
+  -if @world.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@world.errors.count, "error")} prohibited this world from being saved:"
+      %ul
+        - @world.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.control_group :name do
+    = f.text_field :name
+
+  = f.control_group :description do
+    = f.text_area :description, rows: 3
+
+  = f.control_group :game_system do
+    = f.collection_select :game_system_id, GameSystem.all, :id, :name
+
+  .form-actions
+    = f.submit 'Save', class: 'btn btn-primary'

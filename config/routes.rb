@@ -1,6 +1,8 @@
 TrpgRolling::Application.routes.draw do
 
 
+  resources :worlds
+
   devise_for :users
   resources :users, :only => :show
 
