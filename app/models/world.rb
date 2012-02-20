@@ -13,6 +13,6 @@ class World
   field :latest_session, :type => DateTime
   attr_protected :owner
 
-  validates_presence_of :name, :owner, :game_system
+  validates_presence_of :name, :owner, :game_system_id
 
 end
