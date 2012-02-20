@@ -1,12 +1,22 @@
-%p#notice= notice
 
-%p
-  %b Name:
-  = @world.name
-%p
-  %b Description:
-  = @world.description
+%h2= @world.name
 
-= link_to 'Edit', edit_world_path(@world)
-\|
+%dl
+  %dt Owner
+  %dd
+    %i.icon-user
+    = link_to @world.owner.name, @world.owner
+    - if @world.owner == current_user
+      %soan.label.label-info you
+
+  %dt GameSystem
+  %dd= link_to @world.game_system.name, @world.game_system
+
+  %dt LatestSeesion
+  %dd= @world.latest_session_at
+
+.well
+  = simple_format @world.description
+
+
 = link_to 'Back', worlds_path

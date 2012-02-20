@@ -10,7 +10,7 @@ class World
   field :name, :type => String
   field :description, :type => String
   field :open, :type => Boolean, :default => true
-  field :latest_session, :type => DateTime
+  field :latest_session_at, :type => DateTime
   attr_protected :owner
 
   validates_presence_of :name, :owner, :game_system_id

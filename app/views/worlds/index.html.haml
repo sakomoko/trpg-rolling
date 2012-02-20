@@ -1,21 +1,21 @@
 %h1 Listing worlds
 
-%table
+%table.table.table-striped
   %tr
     %th Name
-    %th Description
-    %th
-    %th
-    %th
+    %th GameSystem
+    %th Owner
+    %th Latest Session
 
   - @worlds.each do |world|
     %tr
-      %td= world.name
-      %td= world.description
-      %td= link_to 'Show', world
-      %td= link_to 'Edit', edit_world_path(world)
-      %td= link_to 'Destroy', world, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to world.name, world
+      %td= link_to world.game_system.name, world.game_system
+      %td
+        %i.icon-user
+        = world.owner.name
+      %td
+        %i.icon-time
+        = world.latest_session_at.presence || "No session"
 
-%br
-
-= link_to 'New World', new_world_path
+= link_to 'New World', new_world_path, class: 'btn btn-primary'

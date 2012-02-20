@@ -1,21 +1,13 @@
-%h1 Listing game_systems
+%h1 Supported GameSystem
 
-%table
+%table.table.table-striped
   %tr
     %th Name
     %th Description
-    %th
-    %th
-    %th
 
   - @game_systems.each do |game_system|
     %tr
-      %td= game_system.name
-      %td= game_system.description
-      %td= link_to 'Show', game_system
-      %td= link_to 'Edit', edit_game_system_path(game_system)
-      %td= link_to 'Destroy', game_system, :confirm => 'Are you sure?', :method => :delete
-
-%br
+      %td= link_to game_system.name, game_system
+      %td= truncate game_system.description
 
 = link_to 'New Game system', new_game_system_path
