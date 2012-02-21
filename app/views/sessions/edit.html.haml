@@ -1,0 +1,7 @@
+%h1 Editing session
+
+= render 'form'
+
+= link_to 'Show', [@session.world, @session]
+\|
+= link_to 'Back', world_sessions_path(@session.world)

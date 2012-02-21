@@ -1,0 +1,21 @@
+%h1 Listing sessions
+
+%table
+  %tr
+    %th Title
+    %th Description
+    %th
+    %th
+    %th
+
+  - @sessions.each do |session|
+    %tr
+      %td= session.title
+      %td= session.description
+      %td= link_to 'Show', [session.world, session]
+      %td= link_to 'Edit', edit_world_session_path(session.world, session)
+      %td= link_to 'Destroy', [session.world, session], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Session', new_world_session_path
