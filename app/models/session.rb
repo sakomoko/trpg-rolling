@@ -15,6 +15,9 @@ class Session
 
   field :guidelines, :type => String
 
+  field :open, :type => Boolean, :default => true
+  field :finished, :type => Boolean, :default => false
+
   validates_presence_of :title, :description, :game_master_id, :world_id
 
   attr_protected :_id, :game_master_id

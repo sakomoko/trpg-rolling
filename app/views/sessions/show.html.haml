@@ -20,7 +20,15 @@
         %i.icon-time
         = @session.finished_at.to_s :db
 
-      %dt GuideLines
+      %dt
+        GuideLines
+        - if @session.open?
+          %span.label.label-info
+            Open
+        - else
+          %span.label.label-warning
+            Close
+
       %dd= @session.guidelines
 
   %div.span9
