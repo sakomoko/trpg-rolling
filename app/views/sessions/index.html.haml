@@ -1,21 +1,22 @@
 %h1 Listing sessions
 
-%table
+%table.table.table-striped
   %tr
     %th Title
+    %th GameMaster
     %th Description
-    %th
-    %th
-    %th
+    %th StartedAt
 
   - @sessions.each do |session|
     %tr
-      %td= session.title
-      %td= session.description
-      %td= link_to 'Show', [session.world, session]
-      %td= link_to 'Edit', edit_world_session_path(session.world, session)
-      %td= link_to 'Destroy', [session.world, session], :confirm => 'Are you sure?', :method => :delete
+      %td= link_to session.title, [session.world, session]
+      %td
+        %i.icon-user
+        = link_to session.game_master.name, session.game_master
+      %td= truncate session.description
+      %td
+        %i.icon-time
+        = session.started_at.to_s :db
 
-%br
-
-= link_to 'New Session', new_world_session_path
+.form-actions
+  = link_to 'New Session', new_world_session_path, class: "btn btn-primary"
