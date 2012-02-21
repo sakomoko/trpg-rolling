@@ -72,7 +72,7 @@ describe SessionsController do
       it { should be_a Session }
       it { should be_persisted }
       its(:game_master) { should eq user }
-      it { response.status.should eq 302 }
+      it { controller.should respond_with(:redirect) }
     end
 
     context "with invalid params" do
@@ -81,7 +81,7 @@ describe SessionsController do
         post :create, {:session => {}, :world_id => session.world.to_param }
       end
       it { should be_a_new Session }
-      it { response.should render_template("new") }
+      it { controller.should respond_with :redirect }
     end
   end
 
@@ -109,7 +109,7 @@ describe SessionsController do
       its(:id) { should eq session.id }
 
       it "re-renders the 'edit' template" do
-        response.should render_template("edit")
+        controller.should respond_with :redirect
       end
     end
   end
