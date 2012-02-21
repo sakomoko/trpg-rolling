@@ -46,6 +46,7 @@ group :development, :test do
   gem 'webrat'
   gem "rspec-rails", "~> 2.6"
   gem 'mongoid-rspec'
+  gem "shoulda-matchers"
   gem 'database_cleaner'
   gem 'factory_girl_rails', :require => false
   gem 'capybara'

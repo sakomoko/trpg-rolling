@@ -193,6 +193,7 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    shoulda-matchers (1.0.0)
     simple_form (2.0.0.rc)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -245,6 +246,7 @@ DEPENDENCIES
   rspec-rails (~> 2.6)
   ruby-debug19
   sass-rails (~> 3.1.5)
+  shoulda-matchers
   simple_form (~> 2.0.0.rc)
   spork (~> 0.9.0.rc)
   twitter-bootstrap-rails!
