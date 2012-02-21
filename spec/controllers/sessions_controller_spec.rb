@@ -20,123 +20,108 @@ require 'spec_helper'
 
 describe SessionsController do
 
+  let(:user) { Factory :user }
   let(:session) { Factory :session }
-  let(:valid_attributes) { Factory.build(:session).attributes.symbolize_keys}
+  let(:other_world_session) { Factory :session }
+  let(:valid_attributes) { Factory.build(:session, :world => session.world).attributes.symbolize_keys}
+
+  subject { assigns(:session) }
 
   describe "GET index" do
+    subject { assigns(:sessions) }
+    before do
+      Factory :session
+      get :index, :world_id => session.world.to_param
+    end
+    it { should be_stored_in :sessions }
     it "assigns all sessions as @sessions" do
-      get :index, :world_id => session.world.id
       assigns(:sessions).to_a.should eq([session])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested session as @session" do
-      get :show, {:id => session.to_param}
-      assigns(:session).should eq(session)
+    before do
+      get :show, {:id => session.to_param, :world_id => session.world.to_param}
     end
+    it { should eq session }
   end
 
   describe "GET new" do
-    it "assigns a new session as @session" do
-      get :new, {}
-      assigns(:session).should be_a_new(Session)
+    before do
+      get :new, :world_id => session.world.to_param
     end
+    it { should be_a_new Session }
   end
 
   describe "GET edit" do
-    it "assigns the requested session as @session" do
-      get :edit, {:id => session.to_param}
-      assigns(:session).should eq(session)
+    before do
+      get :edit, {:id => session.to_param, :world_id => session.world.to_param }
     end
+    it { should eq session }
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Session" do
-        expect {
-          post :create, {:session => valid_attributes}
-        }.to change(Session, :count).by(1)
+    before do
+      sign_in user
+    end
+    context "with valid params" do
+      before do
+        post :create, {:session => valid_attributes, :world_id => session.world.to_param }
       end
-
-      it "assigns a newly created session as @session" do
-        post :create, {:session => valid_attributes}
-        assigns(:session).should be_a(Session)
-        assigns(:session).should be_persisted
-      end
-
-      it "redirects to the created session" do
-        post :create, {:session => valid_attributes}
-        response.should redirect_to(Session.last)
-      end
+      it { should_not be_new_record }
+      it { should be_a Session }
+      it { should be_persisted }
+      its(:game_master) { should eq user }
+      it { response.status.should eq 302 }
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved session as @session" do
-        # Trigger the behavior that occurs when invalid params are submitted
+    context "with invalid params" do
+      before do
         Session.any_instance.stub(:save).and_return(false)
-        post :create, {:session => {}}
-        assigns(:session).should be_a_new(Session)
+        post :create, {:session => {}, :world_id => session.world.to_param }
       end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Session.any_instance.stub(:save).and_return(false)
-        post :create, {:session => {}}
-        response.should render_template("new")
-      end
+      it { should be_a_new Session }
+      it { response.should render_template("new") }
     end
   end
 
   describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested session" do
-        # Assuming there are no other sessions in the database, this
-        # specifies that the Session created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Session.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => session.to_param, :session => {'these' => 'params'}}
-      end
+    before do
+      sign_in user
+    end
 
-      it "assigns the requested session as @session" do
-        put :update, {:id => session.to_param, :session => valid_attributes}
-        assigns(:session).should eq(session)
+    context "with valid params" do
+      before do
+        put :update, {:id => session.to_param, :session => valid_attributes, :world_id => session.world.to_param }
       end
+      its(:id) { should eq session.id }
 
       it "redirects to the session" do
-        put :update, {:id => session.to_param, :session => valid_attributes}
-        response.should redirect_to(session)
+        response.should redirect_to(world_session_path(session.world))
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the session as @session" do
-        # Trigger the behavior that occurs when invalid params are submitted
+    context "with invalid params" do
+      before do
         Session.any_instance.stub(:save).and_return(false)
-        put :update, {:id => session.to_param, :session => {}}
-        assigns(:session).should eq(session)
+        put :update, {:id => session.to_param, :session => {}, :world_id => session.world.to_param }
       end
+      its(:id) { should eq session.id }
 
       it "re-renders the 'edit' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Session.any_instance.stub(:save).and_return(false)
-        put :update, {:id => session.to_param, :session => {}}
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested session" do
-      expect {
-        delete :destroy, {:id => session.to_param}
-      }.to change(Session, :count).by(-1)
+    before do
+      delete :destroy, {:id => session.to_param, :world_id => session.world.to_param}
     end
+    it { should be_destroyed }
 
     it "redirects to the sessions list" do
-      delete :destroy, {:id => session.to_param}
-      response.should redirect_to(sessions_url)
+      response.should redirect_to(world_sessions_url(session.world))
     end
   end
 

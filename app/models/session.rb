@@ -16,4 +16,6 @@ class Session
   field :guidelines, :type => String
 
   validates_presence_of :title, :description, :game_master_id, :world_id
+
+  attr_protected :_id, :game_master_id
 end
