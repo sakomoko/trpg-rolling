@@ -1,12 +1,32 @@
-%p#notice= notice
 
-%p
-  %b Title:
-  = @session.title
-%p
-  %b Description:
-  = @session.description
+.hero-unit
+  %h2= @session.title
+  %p= @session.world.name
 
-= link_to 'Edit', edit_world_session_path(@session.world)
-\|
-= link_to 'Back', world_sessions_path
+%div.row-fluid
+  %div.span3
+    %dl
+      %dt GameMaster
+      %dd
+        %i.icon-user
+        = link_to @session.game_master.name, @session.game_master
+
+      %dt StartedAt
+      %dd
+        %i.icon-time
+        = @session.started_at.to_s :db
+      %dt FinishdAt
+      %dd
+        %i.icon-time
+        = @session.finished_at.to_s :db
+
+      %dt GuideLines
+      %dd= @session.guidelines
+
+  %div.span9
+    .well
+      = simple_format @session.description
+
+.form-actions
+  = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
+  = link_to 'Back', world_sessions_path, class: "btn"
