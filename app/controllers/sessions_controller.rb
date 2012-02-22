@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
   # GET /sessions
   # GET /sessions.xml
   def index
-    @sessions = Session.where(:world_id => params[:world_id])
+    @world = World.find(params[:world_id])
+    @sessions = @world.sessions
     respond_with(@sessions)
   end
 
