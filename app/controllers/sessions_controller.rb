@@ -7,6 +7,14 @@ class SessionsController < ApplicationController
     respond_with(@sessions)
   end
 
+  # GET /worlds/1/sessions/finished
+  # GET /worlds/1/sessions/finished.json
+  def finished
+    @world = World.find(params[:world_id])
+    @sessions = @world.sessions.where(:finished => true)
+    respond_with(@sessions)
+  end
+
   # GET /sessions/1
   # GET /sessions/1.xml
   def show

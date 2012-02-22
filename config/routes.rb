@@ -3,7 +3,10 @@ TrpgRolling::Application.routes.draw do
   devise_for :users
 
   resources :worlds do
-    resources :sessions, :rooms
+    resources :sessions, do
+      get :finished, :on => :collection
+    end
+    resources :rooms
   end
 
   resources :sessions, :only => :none, do
