@@ -22,4 +22,14 @@
   = link_to "Create Session", new_world_session_path(@world), class: "btn btn-primary"
   = link_to "View Session List", world_sessions_path(@world), class: "btn"
 
+%h2 Listing sessions
+
+%table.table.table-striped
+  %tr
+    %th Title
+    %th GameMaster
+    %th Description
+    %th StartedAt
+  = render @world.sessions
+
 = link_to 'Back', worlds_path

@@ -1,0 +1,9 @@
+%tr
+  %td= link_to session.title, [session.world, session]
+  %td
+    %i.icon-user
+    = link_to session.game_master.name, session.game_master
+  %td= truncate session.description
+  %td
+    %i.icon-time
+    = session.started_at.to_s :db
