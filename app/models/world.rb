@@ -6,6 +6,7 @@ class World
   belongs_to :owner, class_name: "User", inverse_of: :own_world
   belongs_to :game_system
   has_many :rooms
+  has_many :sessions
 
   field :name, :type => String
   field :description, :type => String
