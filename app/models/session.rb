@@ -5,7 +5,7 @@ class Session
 
   belongs_to :world
   belongs_to :game_master, class_name: "User"
-  has_many :rooms
+  has_many :rooms, as: :roomable
 
   field :title, :type => String
   field :description, :type => String

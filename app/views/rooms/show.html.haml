@@ -1,5 +1,7 @@
 
 %h2= @room.title
+- if @room.roomable
+  %strong #{@room.roomable_type} by #{@room.roomable.title}
 
 %dl
   %dt Owner
@@ -23,6 +25,6 @@
     %b Join Room
   - if @room.user == current_user
     = link_to 'Edit', edit_room_path(@room), class: 'btn'
-  = link_to 'Back', rooms_path, class: 'btn'
+  = link_to 'Back', [@room.roomable, :rooms], class: 'btn'
 
 %div{id: "room-messages-#{@room.id}"}

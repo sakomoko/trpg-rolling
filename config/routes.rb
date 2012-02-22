@@ -6,6 +6,10 @@ TrpgRolling::Application.routes.draw do
     resources :sessions
   end
 
+  resources :sessions do
+    resources :rooms
+  end
+
   resources :users, :only => :show
 
   # The priority is based upon order of creation:

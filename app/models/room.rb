@@ -11,5 +11,6 @@ class Room
   attr_protected :user
 
   belongs_to :user
+  belongs_to :roomable, polymorphic: true
   validates_presence_of :title, :user
 end

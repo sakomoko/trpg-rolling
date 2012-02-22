@@ -5,7 +5,12 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all.desc :created_at
+    if params[:session_id]
+      @session = Session.find(params[:session_id])
+      @rooms = @session.rooms.desc :created_at
+    else
+      @rooms = Room.all.desc :created_at
+    end
     respond_with @rooms
   end
 
@@ -27,6 +32,7 @@ class RoomsController < ApplicationController
   # GET /rooms/new.json
   def new
     @room = Room.new
+    @session = Session.find(params[:session_id]) if params[:session_id]
     respond_with @room
   end
 
@@ -38,8 +44,12 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
+    @session = Session.find(params[:session_id]) if params[:session_id]
     @room = Room.create(params[:room]) do |r|
       r.user = current_user
+      if params[:session_id]
+        r.roomable = @session if @session
+      end
     end
     respond_with @room
   end
