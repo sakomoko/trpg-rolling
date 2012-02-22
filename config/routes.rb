@@ -3,14 +3,15 @@ TrpgRolling::Application.routes.draw do
   devise_for :users
 
   resources :worlds do
-    resources :sessions
+    resources :sessions, :rooms
   end
 
-  resources :sessions do
+  resources :sessions, :only => :none, do
     resources :rooms
   end
 
   resources :users, :only => :show
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
