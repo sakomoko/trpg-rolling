@@ -1,0 +1,13 @@
+%h1 Listing Finished sessions
+
+%table.table.table-striped
+  %tr
+    %th Title
+    %th GameMaster
+    %th Description
+    %th StartedAt
+
+  = render @sessions
+
+.form-actions
+  = link_to "Back", @world, class: "btn"

@@ -13,6 +13,7 @@ class WorldsController < ApplicationController
   # GET /worlds/1.json
   def show
     @world = World.find(params[:id])
+    @sessions = @world.sessions.where(:finished => false)
     respond_with @world
   end
 
