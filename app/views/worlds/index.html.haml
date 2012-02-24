@@ -9,7 +9,7 @@
 
   - @worlds.each do |world|
     %tr
-      %td= link_to world.name, world
+      %td= link_to world.title, world
       %td= link_to world.game_system.name, world.game_system
       %td
         %i.icon-user

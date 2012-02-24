@@ -23,7 +23,16 @@
   = link_to "View Session List", world_sessions_path(@world), class: "btn"
   = link_to "View Finished Session List", finished_world_sessions_path(@world), class: "btn"
 
-%h2 Listing sessions
+%h3 Listing Rooms
+
+%table.table.table-striped
+  %tr
+    %th Title
+    %th Description
+    %th CreatedAt
+  = render @rooms
+
+%h3 Listing Sessions
 
 %table.table.table-striped
   %tr
