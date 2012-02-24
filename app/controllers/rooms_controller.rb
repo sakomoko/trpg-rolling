@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
   # GET /rooms/closed
   # GET /rooms/closed.json
   def closed
-    @rooms = Room.where(closed: true).desc :created_at
+    @rooms = Room.closed.desc :created_at
     respond_with @rooms, template: "rooms/index"
   end
 

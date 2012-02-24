@@ -16,6 +16,7 @@ class Room
 
   scope :opened, where(:closed => false)
   scope :static, where(:static => true)
+  scope :closed, where(:closed => true)
 
   class << self
 

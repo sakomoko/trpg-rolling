@@ -21,4 +21,7 @@ class Session
   validates_presence_of :title, :description, :game_master_id, :world_id
 
   attr_protected :_id, :game_master_id
+
+  scope :finished, where(:finished => true)
+  scope :playing, where(:finished => false)
 end

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   # GET /worlds/1/sessions/finished.json
   def finished
     @world = World.find(params[:world_id])
-    @sessions = @world.sessions.where(:finished => true)
+    @sessions = @world.sessions.finished
     respond_with(@sessions)
   end
 
