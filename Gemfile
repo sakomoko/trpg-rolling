@@ -14,6 +14,8 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'simple_form', "~> 2.0.0.rc"
 gem "responders"
 
+gem "redcarpet"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
