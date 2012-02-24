@@ -1,39 +1,38 @@
 
-.hero-unit
-  %h2= @session.title
-  %p= @session.world.name
 
-%div.row-fluid
-  %div.span3
-    %dl
-      %dt GameMaster
-      %dd
-        %i.icon-user
-        = link_to @session.game_master.name, @session.game_master
+%h2= @session.title
+%p= @session.world.name
 
-      %dt StartedAt
-      %dd
-        %i.icon-time
-        = @session.started_at.to_s :db
-      %dt FinishdAt
-      %dd
-        %i.icon-time
-        = @session.finished_at.to_s :db
+%div.well
+  %dl
+    %dt GameMaster
+    %dd
+      %i.icon-user
+      = link_to @session.game_master.name, @session.game_master
 
-      %dt
-        GuideLines
-        - if @session.open?
-          %span.label.label-info
-            Open
-        - else
-          %span.label.label-warning
-            Close
+    %dt StartedAt
+    %dd
+      %i.icon-time
+      = @session.started_at.to_s :db
+    %dt FinishdAt
+    %dd
+      %i.icon-time
+      = @session.finished_at.to_s :db
 
-      %dd= @session.guidelines
+    %dt
+      GuideLines
+      - if @session.open?
+        %span.label.label-info
+          Open
+      - else
+        %span.label.label-warning
+          Close
 
-  %div.span9
-    .well
-      ~ markdown @session.description
+    %dd= @session.guidelines
+
+%div
+  .well
+    ~ markdown @session.description
 
 .form-actions
   - if @session.game_master == current_user

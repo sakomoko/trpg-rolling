@@ -1,5 +1,7 @@
 
-%h2= @world.name
+.hero-unit
+  %h2= @world.name
+  %p= link_to @world.game_system.name, @world.game_system
 
 %dl
   %dt Owner
@@ -8,9 +10,6 @@
     = link_to @world.owner.name, @world.owner
     - if @world.owner == current_user
       %soan.label.label-info you
-
-  %dt GameSystem
-  %dd= link_to @world.game_system.name, @world.game_system
 
   %dt LatestSeesion
   %dd= @world.latest_session_at
