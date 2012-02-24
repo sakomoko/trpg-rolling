@@ -14,6 +14,7 @@ class WorldsController < ApplicationController
   def show
     @world = World.find(params[:id])
     @sessions = @world.sessions.where(:finished => false)
+    @rooms = @world.rooms.static.opened
     respond_with @world
   end
 
