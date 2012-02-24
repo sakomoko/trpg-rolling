@@ -4,4 +4,5 @@
   = f.input :description, input_html: {class: "input-xlarge", rows: 3}, as: :text
   = f.input :static, as: :boolean
   .form-actions
-    = f.submit :submit, class: 'btn btn-primary'
+    = f.button :submit, class: 'btn-primary'
+    = link_to "back", @parent, class: "btn" if @parent

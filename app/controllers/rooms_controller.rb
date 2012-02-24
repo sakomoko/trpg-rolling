@@ -32,6 +32,7 @@ class RoomsController < ApplicationController
   # GET /rooms/new.json
   def new
     @room = Room.new
+    @room.static = true if params[:static]
     @parent = Room.find_parent_model(params)
     respond_with @room
   end
