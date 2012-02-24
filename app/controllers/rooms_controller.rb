@@ -32,7 +32,7 @@ class RoomsController < ApplicationController
   # GET /rooms/new.json
   def new
     @room = Room.new
-    @session = Session.find(params[:session_id]) if params[:session_id]
+    @parent = Room.find_parent_model(params)
     respond_with @room
   end
 
@@ -44,11 +44,11 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
-    @session = Session.find(params[:session_id]) if params[:session_id]
+    @parent = Room.find_parent_model params
     @room = Room.create(params[:room]) do |r|
       r.user = current_user
-      if params[:session_id]
-        r.roomable = @session if @session
+      if @parent
+        r.roomable = @parent
       end
     end
     respond_with @room
