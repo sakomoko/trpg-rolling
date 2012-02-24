@@ -33,7 +33,7 @@
 
   %div.span9
     .well
-      = simple_format @session.description
+      ~ markdown @session.description
 
 .form-actions
   - if @session.game_master == current_user

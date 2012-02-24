@@ -16,7 +16,7 @@
   %dd= @world.latest_session_at
 
 .well
-  = simple_format @world.description
+  ~ markdown @world.description
 
 .form-actions
   = link_to "Create Session", new_world_session_path(@world), class: "btn btn-primary"
