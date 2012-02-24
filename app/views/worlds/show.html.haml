@@ -19,6 +19,7 @@
 
 .form-actions
   = link_to "Create Session", new_world_session_path(@world), class: "btn btn-primary"
+  = link_to "Create Static Room", new_world_room_path(@world), class: "btn btn-primary"
   = link_to "View Session List", world_sessions_path(@world), class: "btn"
   = link_to "View Finished Session List", finished_world_sessions_path(@world), class: "btn"
 
