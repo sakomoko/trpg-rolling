@@ -1,6 +1,6 @@
 %h2= @game_system.name
 
 .well
-  = simple_format @game_system.description
+  ~ markdown @game_system.description
 
 = link_to 'Back', game_systems_path
