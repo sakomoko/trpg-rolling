@@ -5,4 +5,7 @@
   = f.input :static, as: :boolean
   .form-actions
     = f.button :submit, class: 'btn-primary'
-    = link_to "back", @parent, class: "btn" if @parent
+    - if @parent.class == World
+      = link_to "back", @parent, class: "btn"
+    - else
+      = link_to "back", [@parent.world, @parent], class: "btn"
