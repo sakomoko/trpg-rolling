@@ -39,3 +39,12 @@
     = link_to "Create Session Room", new_session_room_path(@session), class: "btn btn-primary"
   = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
   = link_to 'Back', world_sessions_path, class: "btn"
+
+%h3 Listing Rooms
+
+%table.table.table-striped
+  %tr
+    %th Title
+    %th Description
+    %th CreatedAt
+  = render @session.rooms
