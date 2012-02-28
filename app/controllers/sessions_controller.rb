@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
   # GET /sessions/1.xml
   def show
     @session = Session.find(params[:id])
+    @comment = Comment.new
     respond_with(@session)
   end
 

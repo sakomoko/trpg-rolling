@@ -1,0 +1,13 @@
+%article.comment
+  .avatar
+  %div
+    %div.comment-meta
+      %p.author
+        %i.icon-comment
+        %strong.author
+          = link_to comment.user.name, comment.user
+      %p.info
+        %i.icon-time
+        %em= comment.created_at.to_s :db
+    %div.body.well
+      = comment.body

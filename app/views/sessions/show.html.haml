@@ -48,3 +48,12 @@
     %th Description
     %th CreatedAt
   = render @session.rooms
+
+%h3 Session Comments
+#comments
+  = render @session.comments
+#comment_error
+= simple_form_for [@session, @comment], :remote => true do |f|
+  = f.input :body
+  .form-actions
+    = f.button :submit, class: "btn-success", id: "new_comment_submit"

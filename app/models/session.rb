@@ -6,6 +6,7 @@ class Session
   belongs_to :world
   belongs_to :game_master, class_name: "User"
   has_many :rooms, as: :roomable
+  embeds_many :comments, as: :commentable
 
   field :title, :type => String
   field :description, :type => String
