@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!
 
   # POST /sessions/1/comemnts
   # POST /sessions/1/comments.xml
