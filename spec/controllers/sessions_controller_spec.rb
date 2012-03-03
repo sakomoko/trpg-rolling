@@ -55,10 +55,21 @@ describe SessionsController do
   end
 
   describe "GET new" do
-    before do
-      get :new, :world_id => session.world.to_param
+    context "When a user logged in" do
+      before do
+        sign_in user
+        get :new, :world_id => session.world.to_param
+      end
+      it { should be_a_new Session }
+      its(:world) { should eq session.world }
     end
-    it { should be_a_new Session }
+
+    context "When a user not logged in" do
+      before do
+        get :new, :world_id => session.world.to_param
+      end
+      it { response.should redirect_to(new_user_session_path)}
+    end
   end
 
   describe "GET edit" do
