@@ -90,56 +90,74 @@ describe SessionsController do
   end
 
   describe "POST create" do
-    before do
-      sign_in user
+    context "When a user logged in" do
+      before do
+        sign_in user
+      end
+      context "with valid params" do
+        before do
+          post :create, {:session => valid_attributes, :world_id => session.world.to_param }
+        end
+        it { should_not be_new_record }
+        it { should be_a Session }
+        it { should be_persisted }
+        its(:game_master) { should eq user }
+        it { controller.should respond_with(:redirect) }
+      end
+
+      context "with invalid params" do
+        before do
+          Session.any_instance.stub(:save).and_return(false)
+          post :create, {:session => {}, :world_id => session.world.to_param }
+        end
+        it { should be_a_new Session }
+        it { controller.should respond_with :redirect }
+      end
     end
-    context "with valid params" do
+
+    context "When a user not logged in" do
       before do
         post :create, {:session => valid_attributes, :world_id => session.world.to_param }
       end
-      it { should_not be_new_record }
-      it { should be_a Session }
-      it { should be_persisted }
-      its(:game_master) { should eq user }
-      it { controller.should respond_with(:redirect) }
-    end
-
-    context "with invalid params" do
-      before do
-        Session.any_instance.stub(:save).and_return(false)
-        post :create, {:session => {}, :world_id => session.world.to_param }
-      end
-      it { should be_a_new Session }
-      it { controller.should respond_with :redirect }
+      it { response.should redirect_to(new_user_session_path) }
     end
   end
 
   describe "PUT update" do
-    before do
-      sign_in user
+    context "When a user logged in" do
+      before do
+        sign_in user
+      end
+
+      context "with valid params" do
+        before do
+          put :update, {:id => session.to_param, :session => valid_attributes, :world_id => session.world.to_param }
+        end
+        its(:id) { should eq session.id }
+
+        it "redirects to the session" do
+          response.should redirect_to(world_session_path(session.world))
+        end
+      end
+
+      context "with invalid params" do
+        before do
+          Session.any_instance.stub(:save).and_return(false)
+          put :update, {:id => session.to_param, :session => {}, :world_id => session.world.to_param }
+        end
+        its(:id) { should eq session.id }
+
+        it "re-renders the 'edit' template" do
+          controller.should respond_with :redirect
+        end
+      end
     end
 
-    context "with valid params" do
+    context "When a user not logged in" do
       before do
         put :update, {:id => session.to_param, :session => valid_attributes, :world_id => session.world.to_param }
       end
-      its(:id) { should eq session.id }
-
-      it "redirects to the session" do
-        response.should redirect_to(world_session_path(session.world))
-      end
-    end
-
-    context "with invalid params" do
-      before do
-        Session.any_instance.stub(:save).and_return(false)
-        put :update, {:id => session.to_param, :session => {}, :world_id => session.world.to_param }
-      end
-      its(:id) { should eq session.id }
-
-      it "re-renders the 'edit' template" do
-        controller.should respond_with :redirect
-      end
+      it { response.should redirect_to(new_user_session_path) }
     end
   end
 
