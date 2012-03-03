@@ -30,13 +30,20 @@ describe SessionsController do
   describe "GET index" do
     subject { assigns(:sessions) }
     before do
-      Factory :session
       get :index, :world_id => session.world.to_param
     end
-    it { should be_stored_in :sessions }
-    it "assigns all sessions as @sessions" do
-      assigns(:sessions).to_a.should eq([session])
+    its(:to_a) { should eq [session] }
+    it { assigns(:world).should eq session.world }
+  end
+
+  describe "GET finished" do
+    let(:session) { Factory :session, finished: true }
+    subject { assigns(:sessions) }
+    before do
+      get :finished, :world_id => session.world.to_param
     end
+    its(:to_a) { should eq [session] }
+    it { assigns(:world).should eq session.world }
   end
 
   describe "GET show" do
@@ -44,6 +51,7 @@ describe SessionsController do
       get :show, {:id => session.to_param, :world_id => session.world.to_param}
     end
     it { should eq session }
+    it { assigns(:comment).should be_a_new Comment }
   end
 
   describe "GET new" do
