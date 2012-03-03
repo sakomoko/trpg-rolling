@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new]
+  before_filter :authenticate_user!, :only => [:new, :edit]
 
   # GET /sessions
   # GET /sessions.xml
