@@ -6,6 +6,9 @@ class Ability
 
     can :read, User
     can :update, User, :id => user.id
+
+    can :read, Room
+    can :manage, Room, :user_id => user.id
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
