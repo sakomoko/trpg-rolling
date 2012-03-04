@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Room do
-  describe '#find_parent', do
+  describe '#find_parent' do
     context 'paramsにsession_idが含まれていたとき' do
       let(:session) { Factory :session }
       subject { Room.find_parent_model({ :session_id => session.id}) }
