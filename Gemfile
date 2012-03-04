@@ -36,7 +36,11 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-gem 'ruby-debug19', :require => 'ruby-debug'
+platforms :mri_19 do
+  unless ENV["CI"]
+    gem "ruby-debug19", :require => "ruby-debug" if RUBY_VERSION < "1.9.3"
+  end
+end
 
 group :development, :test do
   gem 'guard'
