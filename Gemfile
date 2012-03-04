@@ -13,7 +13,7 @@ gem 'devise'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form', "~> 2.0.0.rc"
 gem "responders"
-
+gem "cancan"
 gem "redcarpet"
 
 # Gems used only for assets and not required
