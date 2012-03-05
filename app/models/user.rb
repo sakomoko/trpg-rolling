@@ -48,4 +48,9 @@ class User
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :rooms
+
+  def admin?
+    role == 'admin'
+  end
+
 end

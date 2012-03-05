@@ -2,6 +2,21 @@ require 'spec_helper'
 require "cancan/matchers"
 
 describe User do
+
+  describe "#admin?" do
+    subject { user }
+    context "user is admin" do
+      let(:user) { Factory :user, :role => 'admin' }
+      it { should be_admin }
+    end
+
+    context "user is not admin" do
+      let(:user) { Factory :user }
+      it { should_not be_admin }
+    end
+
+  end
+
   describe "abilities" do
     subject { ability }
     let(:ability) { Ability.new(user) }
