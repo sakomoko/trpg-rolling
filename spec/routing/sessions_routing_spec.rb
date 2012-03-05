@@ -7,6 +7,10 @@ describe SessionsController do
       get("/worlds/1/sessions").should route_to("sessions#index", :world_id => "1")
     end
 
+    it "routes to #finished" do
+      get("/worlds/1/sessions/finished").should route_to("sessions#finished", :world_id => "1")
+    end
+
     it "routes to #new" do
       get("/worlds/1/sessions/new").should route_to("sessions#new", :world_id => "1")
     end
