@@ -1,4 +1,6 @@
 class GameSystemsController < ApplicationController
+  load_and_authorize_resource
+
   # GET /game_systems
   # GET /game_systems.json
   def index

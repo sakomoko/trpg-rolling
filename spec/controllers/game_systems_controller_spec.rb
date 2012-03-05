@@ -20,6 +20,7 @@ require 'spec_helper'
 
 describe GameSystemsController do
 
+  let(:user) { Factory :user, :admin }
   let(:game_system) { Factory :game_system }
   let(:valid_attributes) { Factory.attributes_for(:game_system) }
 
@@ -38,6 +39,10 @@ describe GameSystemsController do
   end
 
   describe "GET new" do
+    before do
+      sign_in user
+    end
+
     it "assigns a new game_system as @game_system" do
       get :new
       assigns(:game_system).should be_a_new(GameSystem)
@@ -45,6 +50,10 @@ describe GameSystemsController do
   end
 
   describe "GET edit" do
+    before do
+      sign_in user
+    end
+
     it "assigns the requested game_system as @game_system" do
       get :edit, {:id => game_system.to_param}
       assigns(:game_system).should eq(game_system)
@@ -54,6 +63,10 @@ describe GameSystemsController do
   describe "POST create" do
 
     let(:game_system) { Factory.attributes_for :game_system }
+
+    before do
+      sign_in user
+    end
 
     describe "with valid params" do
       it "creates a new GameSystem" do
@@ -92,6 +105,11 @@ describe GameSystemsController do
   end
 
   describe "PUT update" do
+
+    before do
+      sign_in user
+    end
+
     describe "with valid params" do
       it "updates the requested game_system" do
         # Assuming there are no other game_systems in the database, this
@@ -131,6 +149,10 @@ describe GameSystemsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      sign_in user
+    end
+
     it "destroys the requested game_system" do
       delete :destroy, {:id => game_system.to_param}
       assigns(:game_system).should be_destroyed

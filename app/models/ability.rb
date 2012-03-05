@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     can :manage, :all if user.admin?
+    can :read, GameSystem
 
     can :read, User
     can :update, User, :id => user.id
