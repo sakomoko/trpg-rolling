@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
-  load_and_authorize_resource
+  load_resource :world
+  load_resource :session
+  load_and_authorize_resource :room, :through => [:world, :session], :shallow => true
 
   respond_to :html, :json
 

@@ -23,6 +23,7 @@ describe RoomsController do
   let(:user) { Factory :user}
   named_let(:room) { Factory :room, :user => user }
   let(:valid_attributes) { Factory.attributes_for(:room) }
+  let(:world) { Factory :world, :owner => user}
 
   describe "GET index" do
     it "assigns all rooms as @rooms" do
@@ -41,7 +42,7 @@ describe RoomsController do
   describe "GET new" do
     before do
       let_sign_in?
-      get :new
+      get :new, { :world_id => world.to_param }
     end
     context "When user logged in" do
       let(:let_sign_in?) { sign_in user }
@@ -68,24 +69,24 @@ describe RoomsController do
 
     context "When user logged in" do
       before do
-        sign_in Factory :user
+        sign_in user
       end
 
       describe "with valid params" do
         it "creates a new Room" do
           expect {
-            post :create, {:room => room }
+            post :create, {:room => room, :world_id => world.to_param }
           }.to change(Room, :count).by(1)
         end
 
         it "assigns a newly created room as @room" do
-          post :create, {:room => room}
+          post :create, {:room => room, :world_id => world.to_param }
           assigns(:room).should be_a(Room)
           assigns(:room).should be_persisted
         end
 
         it "redirects to the created room" do
-          post :create, {:room => room}
+          post :create, {:room => room, :world_id => world.to_param }
           response.should redirect_to(Room.last)
         end
       end
@@ -94,14 +95,14 @@ describe RoomsController do
         it "assigns a newly created but unsaved room as @room" do
           # Trigger the behavior that occurs when invalid params are submitted
           Room.any_instance.stub(:create).and_return(false)
-          post :create, {:room => {}}
+          post :create, {:room => {}, :world_id => world.to_param }
           assigns(:room).should be_a_new(Room)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           Room.any_instance.stub(:create).and_return(false)
-          post :create, {:room => {}}
+          post :create, {:room => {}, :world_id => world.to_param }
           response.should render_template("new")
         end
       end
