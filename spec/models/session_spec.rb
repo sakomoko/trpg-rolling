@@ -37,6 +37,12 @@ describe Session do
       it { should_not be_able_to(:update, session)}
       it { should_not be_able_to(:destroy, session)}
     end
+
+    context "When access Session World Owner" do
+      let(:world) { Factory :world, :owner => user }
+      named_let(:session) { Factory :session, :world => world}
+      it { should be_able_to(:manage, session)}
+    end
   end
 
 end

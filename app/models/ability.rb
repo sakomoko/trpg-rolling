@@ -23,6 +23,9 @@ class Ability
       #for Session Ability
       can :create, Session
       can :manage, Session, :game_master_id => user.id
+      can :manage, Session do |session|
+        session.world.try(:owner) == user
+      end
 
     end
 
