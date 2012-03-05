@@ -20,8 +20,9 @@ require 'spec_helper'
 
 describe WorldsController do
 
-  let(:world) { Factory :world }
-  let(:valid_attributes) { Factory.build(:world).attributes.symbolize_keys }
+  let(:user) { Factory :user }
+  let(:world) { Factory :world, :owner => user }
+  let(:valid_attributes) { Factory.build(:world, :owner => nil).attributes.symbolize_keys }
 
   describe "GET index" do
     it "assigns all worlds as @worlds" do
@@ -38,57 +39,69 @@ describe WorldsController do
   end
 
   describe "GET new" do
-    it "assigns a new world as @world" do
-      get :new
-      assigns(:world).should be_a_new(World)
+    context "When user logged in" do
+      before do
+        sign_in user
+      end
+      it "assigns a new world as @world" do
+        get :new
+        assigns(:world).should be_a_new(World)
+      end
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested world as @world" do
-      get :edit, {:id => world.to_param}
-      assigns(:world).should eq(world)
+    context "When user logged in" do
+      before do
+        sign_in user
+      end
+      it "assigns the requested world as @world" do
+        get :edit, {:id => world.to_param}
+        assigns(:world).should eq(world)
+      end
     end
   end
 
   describe "POST create" do
 
-    before do
-      sign_in Factory :user
-    end
+    context "When user logged in" do
+      before do
+        sign_in user
+      end
 
-    describe "with valid params" do
-      it "creates a new World" do
-        expect {
+      context "with valid params" do
+        it "creates a new World" do
+          expect {
+            post :create, {:world => valid_attributes}
+          }.to change(World, :count).by(1)
+        end
+
+        it "assigns a newly created world as @world" do
           post :create, {:world => valid_attributes}
-        }.to change(World, :count).by(1)
+          assigns(:world).should be_a(World)
+          assigns(:world).should be_persisted
+        end
+
+        it "redirects to the created world" do
+          post :create, {:world => valid_attributes}
+          response.should redirect_to(World.last)
+        end
       end
 
-      it "assigns a newly created world as @world" do
-        post :create, {:world => valid_attributes}
-        assigns(:world).should be_a(World)
-        assigns(:world).should be_persisted
-      end
+      context "with invalid params" do
+        it "assigns a newly created but unsaved world as @world" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          World.any_instance.stub(:save).and_return(false)
+          post :create, {:world => {}}
+          assigns(:world).should be_a_new(World)
+        end
 
-      it "redirects to the created world" do
-        post :create, {:world => valid_attributes}
-        response.should redirect_to(World.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved world as @world" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        World.any_instance.stub(:save).and_return(false)
-        post :create, {:world => {}}
-        assigns(:world).should be_a_new(World)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        World.any_instance.stub(:save).and_return(false)
-        post :create, {:world => {}}
-        response.status.should eq 302
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          World.any_instance.stub(:save).and_return(false)
+          post :create, {:world => {}}
+          response.status.should eq 302
+        end
       end
     end
   end
@@ -96,7 +109,7 @@ describe WorldsController do
   describe "PUT update" do
 
     before do
-      sign_in Factory :user
+      sign_in user
     end
 
     describe "with valid params" do
@@ -138,6 +151,9 @@ describe WorldsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      sign_in user
+    end
     it "destroys the requested world" do
       delete :destroy, {:id => world.to_param}
       assigns(:world).should be_destroyed
