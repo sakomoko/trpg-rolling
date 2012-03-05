@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :update, :to => :close
+
     user ||= User.new
 
     can :manage, :all if user.admin?

@@ -173,4 +173,14 @@ describe RoomsController do
     end
   end
 
+  describe "PUT close" do
+    named_let(:room) { Factory :room, :user => user, :roomable => world }
+    before do
+      sign_in user
+      put :close, { :id => room.to_param, :world_id => world.to_param }
+    end
+    it { assigns(:room).should be_closed }
+    it { response.should redirect_to(room_path(room)) }
+  end
+
 end

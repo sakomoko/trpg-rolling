@@ -75,6 +75,15 @@ class RoomsController < ApplicationController
     end
   end
 
+  # PUT /rooms/1/close
+  # PUT /rooms/1/close.json
+  def close
+    @room = Room.find(params[:id])
+    @room.closed = true
+    @room.save
+    respond_with @room
+  end
+
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
