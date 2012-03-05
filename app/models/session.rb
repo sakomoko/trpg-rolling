@@ -25,4 +25,6 @@ class Session
 
   scope :finished, where(:finished => true)
   scope :playing, where(:finished => false)
+
+  alias :owner :game_master
 end
