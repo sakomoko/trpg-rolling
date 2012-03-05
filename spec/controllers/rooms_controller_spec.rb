@@ -20,7 +20,8 @@ require 'spec_helper'
 
 describe RoomsController do
 
-  let(:room) { Factory :room }
+  let(:user) { Factory :user}
+  named_let(:room) { Factory :room, :user => user }
   let(:valid_attributes) { Factory.attributes_for(:room) }
 
   describe "GET index" do
@@ -45,10 +46,11 @@ describe RoomsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested room as @room" do
+    before do
+      sign_in user
       get :edit, {:id => room.to_param}
-      assigns(:room).should eq(room)
     end
+    it { assigns(:room).should eq room }
   end
 
   describe "POST create" do
@@ -95,6 +97,10 @@ describe RoomsController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before do
+        sign_in user
+        put :update, {:id => room.to_param, :room => valid_attributes}
+      end
       it "updates the requested room" do
         # Assuming there are no other rooms in the database, this
         # specifies that the Room created on the previous line
@@ -105,41 +111,43 @@ describe RoomsController do
       end
 
       it "assigns the requested room as @room" do
-        put :update, {:id => room.to_param, :room => valid_attributes}
         assigns(:room).should eq(room)
       end
 
       it "redirects to the room" do
-        put :update, {:id => room.to_param, :room => valid_attributes}
         response.should redirect_to(room)
       end
     end
 
     describe "with invalid params" do
+      before do
+        sign_in user
+        put :update, {:id => room.to_param, :room => {}}
+      end
       it "assigns the room as @room" do
         # Trigger the behavior that occurs when invalid params are submitted
         Room.any_instance.stub(:save).and_return(false)
-        put :update, {:id => room.to_param, :room => {}}
         assigns(:room).should eq(room)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Room.any_instance.stub(:save).and_return(false)
-        put :update, {:id => room.to_param, :room => {}}
-        response.should render_template("edit")
+        response.should redirect_to(room_path(room))
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested room" do
+    before do
+      sign_in user
       delete :destroy, {:id => room.to_param}
+    end
+    it "destroys the requested room" do
       assigns(:room).should be_destroyed
     end
 
     it "redirects to the rooms list" do
-      delete :destroy, {:id => room.to_param}
       response.should redirect_to(rooms_url)
     end
   end
