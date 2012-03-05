@@ -39,9 +39,18 @@ describe RoomsController do
   end
 
   describe "GET new" do
-    it "assigns a new room as @room" do
+    before do
+      let_sign_in?
       get :new
-      assigns(:room).should be_a_new(Room)
+    end
+    context "When user logged in" do
+      let(:let_sign_in?) { sign_in user }
+      it { assigns(:room).should be_a_new(Room) }
+    end
+
+    context "When user not logged in" do
+      let(:let_sign_in?) { sign_out user }
+      it { response.should redirect_to(new_user_session_path)}
     end
   end
 
@@ -54,44 +63,55 @@ describe RoomsController do
   end
 
   describe "POST create" do
-    before do
-      sign_in Factory :user
-    end
 
     let(:room) { Factory.attributes_for :room }
-    describe "with valid params" do
-      it "creates a new Room" do
-        expect {
-          post :create, {:room => room }
-        }.to change(Room, :count).by(1)
+
+    context "When user logged in" do
+      before do
+        sign_in Factory :user
       end
 
-      it "assigns a newly created room as @room" do
-        post :create, {:room => room}
-        assigns(:room).should be_a(Room)
-        assigns(:room).should be_persisted
+      describe "with valid params" do
+        it "creates a new Room" do
+          expect {
+            post :create, {:room => room }
+          }.to change(Room, :count).by(1)
+        end
+
+        it "assigns a newly created room as @room" do
+          post :create, {:room => room}
+          assigns(:room).should be_a(Room)
+          assigns(:room).should be_persisted
+        end
+
+        it "redirects to the created room" do
+          post :create, {:room => room}
+          response.should redirect_to(Room.last)
+        end
       end
 
-      it "redirects to the created room" do
-        post :create, {:room => room}
-        response.should redirect_to(Room.last)
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved room as @room" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Room.any_instance.stub(:create).and_return(false)
+          post :create, {:room => {}}
+          assigns(:room).should be_a_new(Room)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Room.any_instance.stub(:create).and_return(false)
+          post :create, {:room => {}}
+          response.should render_template("new")
+        end
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved room as @room" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Room.any_instance.stub(:create).and_return(false)
-        post :create, {:room => {}}
-        assigns(:room).should be_a_new(Room)
+    context "When user not logged in" do
+      before do
+        post :create, {:room => room}
       end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Room.any_instance.stub(:create).and_return(false)
-        post :create, {:room => {}}
-        response.should render_template("new")
-      end
+      it { response.should redirect_to(new_user_session_path) }
     end
   end
 

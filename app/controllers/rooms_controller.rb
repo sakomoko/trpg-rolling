@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
   load_and_authorize_resource
 
   respond_to :html, :json
