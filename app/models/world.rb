@@ -3,7 +3,7 @@ class World
   include Mongoid::Paranoia
   include Mongoid::Timestamps
 
-  belongs_to :owner, class_name: "User", inverse_of: :own_world
+  belongs_to :owner, class_name: "User"
   belongs_to :game_system
   has_many :rooms, as: :roomable
   has_many :sessions
