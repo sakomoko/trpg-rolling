@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :edit, :create, :update]
+  load_and_authorize_resource
+  skip_authorize_resource :only => :finished
 
   # GET /sessions
   # GET /sessions.xml

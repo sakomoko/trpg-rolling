@@ -21,7 +21,7 @@ require 'spec_helper'
 describe SessionsController do
 
   let(:user) { Factory :user }
-  let(:session) { Factory :session }
+  let(:session) { Factory :session, :game_master => user }
   let(:other_world_session) { Factory :session }
   let(:valid_attributes) { Factory.build(:session, :world => session.world).attributes.symbolize_keys}
 
@@ -163,6 +163,7 @@ describe SessionsController do
 
   describe "DELETE destroy" do
     before do
+      sign_in user
       delete :destroy, {:id => session.to_param, :world_id => session.world.to_param}
     end
     it { should be_destroyed }
