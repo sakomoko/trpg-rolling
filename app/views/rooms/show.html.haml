@@ -1,7 +1,15 @@
 
-%h2= @room.title
+%h2
+  = @room.title
+  - if @room.closed?
+    %span.label.label-important Closed
 - if @room.roomable
   %strong #{@room.roomable_type} by #{@room.roomable.title}
+
+%div.pull-right
+  - if can? :update, @room
+    = link_to 'Edit', edit_room_path(@room), class: 'btn btn-mini btn-primary'
+    = link_to 'Close Room', [:close, @room.roomable, @room], class: 'btn btn-mini btn-warning', method: :put
 
 %dl
   %dt Owner
@@ -20,14 +28,11 @@
   = @room.description.presence || "No Description."
 
 %div.form-actions
-  %a.btn.btn-success{href: "#"}
-    %i.icon-plus-sign.icon-white
-    %b Join Room
-  - if @room.user == current_user
-    = link_to 'Edit', edit_room_path(@room), class: 'btn'
-  - if @room.static?
-    = link_to 'Back', @room.roomable, class: 'btn'
-  - else
-    = link_to 'Back', [@room.roomable, :rooms], class: 'btn'
+  - unless @room.closed?
+    %a.btn.btn-success{href: "#"}
+      %i.icon-plus-sign.icon-white
+      %b Join Room
+
+  = back_from_room @room.roomable
 
 %div{id: "room-messages-#{@room.id}"}
