@@ -1,5 +1,15 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe GameSystem do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "ability" do
+    subject { ability }
+    let(:ability) { Ability.new(user) }
+
+    context "When editing by admin" do
+      let(:user) { Factory :user, :role => 'admin' }
+      it { should be_able_to(:manage, GameSystem.new)}
+    end
+
+  end
 end
