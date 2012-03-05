@@ -26,17 +26,29 @@ describe Room do
 
   describe "ability" do
     subject { ability }
+
     let(:ability) { Ability.new(user) }
     named_let(:user) { Factory :user }
     named_let(:new_room) { Room.new }
+    named_let(:room) { Factory :room }
+
     context "When editing user own" do
       named_let(:room) { Factory :room, :user => user }
       it { should be_able_to(:manage, room) }
     end
 
     context "When editing room of others" do
-      named_let(:room) { Factory :room }
       it { should be_able_to(:read, room)}
+      it { should_not be_able_to(:manage, room) }
+      it { should_not be_able_to(:update, room) }
+      it { should_not be_able_to(:destroy, room) }
+    end
+
+    context "When access guest user" do
+      let(:user) { Factory.build :user }
+      it { should be_able_to(:read, room) }
+      it { should_not be_able_to(:manage, room) }
+      it { should_not be_able_to(:create, room) }
       it { should_not be_able_to(:update, room) }
       it { should_not be_able_to(:destroy, room) }
     end
