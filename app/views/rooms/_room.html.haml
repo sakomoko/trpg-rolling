@@ -1,4 +1,10 @@
 %tr
-  %td= link_to room.title, room
+  %td
+    - if room.closed?
+      %span.label closed
+    - else
+      %span.label.label-info open
+    = link_to room.title, room
+
   %td= truncate room.description
   %td= room.created_at.to_s :db
