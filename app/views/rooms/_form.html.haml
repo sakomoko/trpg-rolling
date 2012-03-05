@@ -3,6 +3,9 @@
   = f.input :title
   = f.input :description, input_html: {class: "input-xlarge", rows: 3}, as: :text
   = f.input :static, as: :boolean
+  - if @room.closed?
+    = f.input :closed, as: :boolean
+
   .form-actions
     = f.button :submit, class: 'btn-primary'
     - if @parent.nil?
