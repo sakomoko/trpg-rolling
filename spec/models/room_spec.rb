@@ -34,8 +34,14 @@ describe Room do
 
     context "When create SessionRoom from member" do
       named_let(:new_room) { Factory.build :room, :roomable => Factory(:session) }
-      it { should be_able_to(:create, new_room)}
+      it { should_not be_able_to(:create, new_room)}
       it { should_not be_able_to(:manage, room) }
+    end
+
+    context "When create SessionRoom from game_master" do
+      named_let(:new_room) { Factory.build :room, :roomable => Factory(:session, :game_master => user) }
+      it { should be_able_to(:create, new_room)}
+      it { should be_able_to(:manage, new_room) }
     end
 
     context "When create WorldRoom from member" do

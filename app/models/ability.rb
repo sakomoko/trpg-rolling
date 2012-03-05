@@ -22,7 +22,7 @@ class Ability
       #for Room Ability
       can [:update, :destroy], Room, :user_id => user.id
       can :manage, Room do |room|
-        room.roomable.try(:owner) == user || room.roomable_type == "Session"
+        room.roomable.try(:owner) == user
       end
 
       #for Session Ability
