@@ -67,7 +67,40 @@ describe RoomsController do
       it "routes to #destroy" do
         delete("/sessions/1/rooms/1").should route_to("rooms#destroy", :id => "1", :session_id => "1")
       end
+    end
 
+    describe "nest worlds" do
+      it "routes to #index" do
+        get("/worlds/1/rooms").should route_to("rooms#index", :world_id => "1")
+      end
+
+      it "routes to #new" do
+        get("/worlds/1/rooms/new").should route_to("rooms#new", :world_id => "1")
+      end
+
+      it "routes to #show" do
+        get("/worlds/1/rooms/1").should route_to("rooms#show", :id => "1", :world_id => "1")
+      end
+
+      it "routes to #edit" do
+        get("/worlds/1/rooms/1/edit").should route_to("rooms#edit", :id => "1", :world_id => "1")
+      end
+
+      it "routes to #create" do
+        post("/worlds/1/rooms").should route_to("rooms#create", :world_id => "1")
+      end
+
+      it "routes to #update" do
+        put("/worlds/1/rooms/1").should route_to("rooms#update", :id => "1", :world_id => "1")
+      end
+
+      it "routes to #close" do
+        put("/worlds/1/rooms/1/close").should route_to("rooms#close", :id => "1", :world_id => "1")
+      end
+
+      it "routes to #destroy" do
+        delete("/worlds/1/rooms/1").should route_to("rooms#destroy", :id => "1", :world_id => "1")
+      end
     end
 
   end

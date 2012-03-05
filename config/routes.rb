@@ -6,7 +6,9 @@ TrpgRolling::Application.routes.draw do
     resources :sessions do
       get :finished, :on => :collection
     end
-    resources :rooms
+    resources :rooms do
+      put :close, :on => :member
+    end
   end
 
   resources :sessions, :only => :none do
