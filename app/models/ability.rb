@@ -5,13 +5,23 @@ class Ability
     user ||= User.new
 
     can :manage, :all if user.admin?
-    can :read, GameSystem
 
-    can :read, User
-    can :update, User, :id => user.id
+    can :read, [World, GameSystem, User, Room]
 
-    can :read, Room
-    can :manage, Room, :user_id => user.id
+    if user.persisted?
+
+      # for User Ability
+      can :update, User, :id => user.id
+
+      # for World Ability
+      can :create, World
+      can :manage, World, :owner_id => user.id
+
+      #for Room Ability
+      can :manage, Room, :user_id => user.id
+
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
