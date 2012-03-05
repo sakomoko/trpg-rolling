@@ -40,7 +40,9 @@ class User
   ## Token authenticatable
   field :authentication_token, :type => String
 
-  field :name
+  field :name, :type => String
+  field :role, :type => String, :default => nil
+
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
