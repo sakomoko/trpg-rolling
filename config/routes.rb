@@ -10,7 +10,10 @@ TrpgRolling::Application.routes.draw do
   end
 
   resources :sessions, :only => :none do
-    resources :rooms, :comments
+    resources :rooms do
+      put :close, :on => :member
+    end
+    resources :comments
   end
 
   resources :users, :only => :show
@@ -77,5 +80,6 @@ TrpgRolling::Application.routes.draw do
 
   resources :rooms do
     get :closed, :on => :collection
+    put :close, :on => :member
   end
 end
