@@ -32,14 +32,32 @@ describe Room do
     named_let(:new_room) { Room.new }
     named_let(:room) { Factory :room }
 
+    context "When create SessionRoom from member" do
+      named_let(:new_room) { Factory.build :room, :roomable => Factory(:session) }
+      it { should be_able_to(:create, new_room)}
+      it { should_not be_able_to(:manage, room) }
+    end
+
+    context "When create WorldRoom from member" do
+      it { should_not be_able_to(:create, new_room) }
+      it { should_not be_able_to(:manage, room) }
+    end
+
+    context "When create WorldRoom from World owner" do
+      named_let(:new_room) { Factory.build :room, :roomable => Factory(:world, :owner => user)}
+      it { should be_able_to(:manage, new_room)}
+    end
+
     context "When editing user own" do
       named_let(:room) { Factory :room, :user => user }
-      it { should be_able_to(:manage, room) }
+      it { should be_able_to(:update, room) }
+      it { should be_able_to(:destroy, room) }
     end
 
     context "When editing room of others" do
       it { should be_able_to(:read, room)}
       it { should_not be_able_to(:manage, room) }
+      it { should_not be_able_to(:create, new_room) }
       it { should_not be_able_to(:update, room) }
       it { should_not be_able_to(:destroy, room) }
     end
@@ -48,7 +66,7 @@ describe Room do
       let(:user) { Factory.build :user }
       it { should be_able_to(:read, room) }
       it { should_not be_able_to(:manage, room) }
-      it { should_not be_able_to(:create, room) }
+      it { should_not be_able_to(:create, new_room) }
       it { should_not be_able_to(:update, room) }
       it { should_not be_able_to(:destroy, room) }
     end

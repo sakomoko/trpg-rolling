@@ -18,7 +18,10 @@ class Ability
       can :manage, World, :owner_id => user.id
 
       #for Room Ability
-      can :manage, Room, :user_id => user.id
+      can [:update, :destroy], Room, :user_id => user.id
+      can :manage, Room do |room|
+        room.roomable.try(:owner) == user || room.roomable_type == "Session"
+      end
 
       #for Session Ability
       can :create, Session
