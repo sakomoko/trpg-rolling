@@ -6,7 +6,7 @@ class Ability
 
     can :manage, :all if user.admin?
 
-    can :read, [World, GameSystem, User, Room]
+    can :read, [World, GameSystem, User, Room, Session]
 
     if user.persisted?
 
@@ -19,6 +19,10 @@ class Ability
 
       #for Room Ability
       can :manage, Room, :user_id => user.id
+
+      #for Session Ability
+      can :create, Session
+      can :manage, Session, :game_master_id => user.id
 
     end
 
