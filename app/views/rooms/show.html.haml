@@ -9,7 +9,8 @@
 %div.pull-right
   - if can? :update, @room
     = link_to 'Edit', edit_room_path(@room), class: 'btn btn-mini btn-primary'
-    = link_to 'Close Room', [:close, @room.roomable, @room], class: 'btn btn-mini btn-warning', method: :put
+    - unless @room.closed?
+      = link_to 'Close Room', [:close, @room.roomable, @room], class: 'btn btn-mini btn-warning', method: :put
 
 %dl
   %dt Owner
