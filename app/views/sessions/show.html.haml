@@ -1,4 +1,8 @@
 
+- if can? :manage, @session
+  .pull-right
+    = link_to "Create Session Room", new_session_room_path(@session), class: "btn btn-primary"
+    = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
 
 %h2= @session.title
 %p= @session.world.name
@@ -35,9 +39,6 @@
     ~ markdown @session.description
 
 .form-actions
-  - if @session.game_master == current_user
-    = link_to "Create Session Room", new_session_room_path(@session), class: "btn btn-primary"
-  = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
   = link_to 'Back', world_sessions_path, class: "btn"
 
 %h3 Listing Session Rooms
