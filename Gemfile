@@ -10,8 +10,8 @@ gem "bson_ext", "~> 1.3"
 gem "haml-rails"
 gem 'devise'
 
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'simple_form', "~> 2.0.0.rc"
+gem 'twitter-bootstrap-rails'
+gem 'simple_form', "~> 2.0.0"
 gem "responders"
 gem "cancan"
 gem "redcarpet"
