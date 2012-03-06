@@ -8,7 +8,6 @@ class Room
   field :static, :type => Boolean, :default => false
   field :closed, :type => Boolean, :default => false
   field :closed_at, :type => DateTime
-  attr_protected :user_id
 
   belongs_to :user
   belongs_to :roomable, polymorphic: true
@@ -17,6 +16,8 @@ class Room
   scope :opened, where(:closed => false)
   scope :static, where(:static => true)
   scope :closed, where(:closed => true)
+
+  attr_accessible :title, :description, :static
 
   class << self
 

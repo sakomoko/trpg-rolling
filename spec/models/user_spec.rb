@@ -3,6 +3,18 @@ require "cancan/matchers"
 
 describe User do
 
+  describe "attr_accesible" do
+    it { should be_accessible :name }
+    it { should be_accessible :email }
+    it { should be_accessible :password }
+    it { should be_accessible :password_confirmation }
+    it { should be_accessible :remember_me }
+
+    it { should_not be_accessible :id }
+    it { should_not be_accessible :rorle }
+  end
+
+
   describe "#admin?" do
     subject { user }
     context "user is admin" do

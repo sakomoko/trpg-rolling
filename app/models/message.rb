@@ -10,4 +10,6 @@ class Message
   belongs_to :user
   belongs_to :room
   validates_presence_of :user, :room, :body
+
+  attr_accessible :body, :supplement, :alias
 end

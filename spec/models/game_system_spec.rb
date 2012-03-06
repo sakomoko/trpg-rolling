@@ -2,6 +2,12 @@ require 'spec_helper'
 require "cancan/matchers"
 
 describe GameSystem do
+
+  describe "attr_accesible" do
+    it { should be_accessible :name }
+    it { should be_accessible :description }
+  end
+
   describe "ability" do
     subject { ability }
     let(:ability) { Ability.new(user) }

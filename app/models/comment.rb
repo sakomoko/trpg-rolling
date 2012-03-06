@@ -7,7 +7,7 @@ class Comment
   belongs_to :user
   embedded_in :commentable, polymorphic: true
 
-  attr_protected :user_id
-
   validates_presence_of :body
+
+  attr_accessible :body
 end

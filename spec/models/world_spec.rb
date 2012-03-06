@@ -3,6 +3,22 @@ require "cancan/matchers"
 
 describe World do
 
+  describe "attr_accesible" do
+    it { should be_accessible :name }
+    it { should be_accessible :description }
+    it { should be_accessible :open }
+    it { should be_accessible :game_system_id }
+
+    it { should_not be_accessible :id }
+    it { should_not be_accessible :owner_id }
+    it { should_not be_accessible :latest_session_at }
+
+    it { should_not be_accessible :created_at }
+    it { should_not be_accessible :updated_at }
+    it { should_not be_accessible :deleted_at }
+  end
+
+
   describe "ability" do
     subject { ability }
     let(:ability) { Ability.new(user) }

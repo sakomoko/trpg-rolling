@@ -2,6 +2,27 @@ require 'spec_helper'
 require "cancan/matchers"
 
 describe Session do
+
+  describe "attr_accesible" do
+    it { should be_accessible :title }
+    it { should be_accessible :description }
+    it { should be_accessible :started_at }
+    it { should be_accessible :finished_at }
+    it { should be_accessible :guidelines }
+    it { should be_accessible :published }
+
+    it { should_not be_accessible :id }
+    it { should_not be_accessible :world_id }
+    it { should_not be_accessible :game_master_id }
+
+    it { should_not be_accessible :finished }
+    it { should_not be_accessible :closed_at }
+
+    it { should_not be_accessible :created_at }
+    it { should_not be_accessible :updated_at }
+  end
+
+
   describe "ability" do
     subject { ability }
     let(:ability) { Ability.new(user) }

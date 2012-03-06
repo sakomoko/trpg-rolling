@@ -12,9 +12,10 @@ class World
   field :description, :type => String
   field :open, :type => Boolean, :default => true
   field :latest_session_at, :type => DateTime
-  attr_protected :owner_id
 
   validates_presence_of :name, :owner_id, :game_system_id
+
+  attr_accessible :name, :description, :open, :game_system_id
 
   alias :title :name
 end

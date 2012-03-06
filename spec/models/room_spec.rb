@@ -3,6 +3,20 @@ require 'spec_helper'
 require "cancan/matchers"
 
 describe Room do
+
+  describe "attr_accesible" do
+    it { should be_accessible :title }
+    it { should be_accessible :description }
+    it { should be_accessible :static }
+
+    it { should_not be_accessible :id }
+    it { should_not be_accessible :user_id }
+    it { should_not be_accessible :roomable_id }
+
+    it { should_not be_accessible :closed }
+    it { should_not be_accessible :closed_at }
+  end
+
   describe '#find_parent' do
     context 'paramsにsession_idが含まれていたとき' do
       let(:session) { Factory :session }
