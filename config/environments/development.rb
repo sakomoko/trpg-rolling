@@ -35,6 +35,9 @@ TrpgRolling::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  # Disable assets logger
+  config.assets.logger = false
+
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # A dummy setup for development - no deliveries, but logged
