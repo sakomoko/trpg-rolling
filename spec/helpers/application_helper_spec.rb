@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe ApplicationHelper do
   describe "#back_from_room" do
-    let(:world) { Factory :world}
-    let(:session) { Factory :session }
+    let(:world) { FactoryGirl.create :world}
+    let(:session) { FactoryGirl.create :session }
 
     context "When World Room" do
       it { helper.back_from_room(world).should eq "<a href=\"/worlds/#{world.to_param}\" class=\"btn\">Back</a>" }

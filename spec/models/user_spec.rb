@@ -18,12 +18,12 @@ describe User do
   describe "#admin?" do
     subject { user }
     context "user is admin" do
-      let(:user) { Factory :user, :role => 'admin' }
+      let(:user) { FactoryGirl.create :user, :role => 'admin' }
       it { should be_admin }
     end
 
     context "user is not admin" do
-      let(:user) { Factory :user }
+      let(:user) { FactoryGirl.create :user }
       it { should_not be_admin }
     end
 
@@ -32,7 +32,7 @@ describe User do
   describe "abilities" do
     subject { ability }
     let(:ability) { Ability.new(user) }
-    named_let(:user) { Factory :user }
+    named_let(:user) { FactoryGirl.create :user }
     context "When editing self own" do
       it { should be_able_to(:read, user) }
       it { should be_able_to(:update, user) }
@@ -40,7 +40,7 @@ describe User do
     end
 
     context "When editing other user" do
-      named_let(:other_user) { Factory :user }
+      named_let(:other_user) { FactoryGirl.create :user }
       it { should be_able_to(:read, other_user) }
       it { should_not be_able_to(:update, other_user) }
       it { should_not be_able_to(:create, other_user) }

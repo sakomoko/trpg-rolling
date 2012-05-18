@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe CommentsController do
 
-  let(:user) { Factory :user }
-  let(:session) { Factory :session }
-  let(:valid_attributes) { Factory.build(:comment).attributes.symbolize_keys}
+  let(:user) { FactoryGirl.create :user }
+  let(:session) { FactoryGirl.create :session }
+  let(:valid_attributes) { FactoryGirl.build(:comment).attributes.symbolize_keys}
 
   describe "POST 'create'" do
     context 'logged in' do

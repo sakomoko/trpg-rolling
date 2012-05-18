@@ -20,9 +20,9 @@ require 'spec_helper'
 
 describe GameSystemsController do
 
-  let(:user) { Factory :user, :admin }
-  let(:game_system) { Factory :game_system }
-  let(:valid_attributes) { Factory.attributes_for(:game_system) }
+  let(:user) { FactoryGirl.create :user, :admin }
+  let(:game_system) { FactoryGirl.create :game_system }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:game_system) }
 
   describe "GET index" do
     it "assigns all game_systems as @game_systems" do
@@ -62,7 +62,7 @@ describe GameSystemsController do
 
   describe "POST create" do
 
-    let(:game_system) { Factory.attributes_for :game_system }
+    let(:game_system) { FactoryGirl.attributes_for :game_system }
 
     before do
       sign_in user

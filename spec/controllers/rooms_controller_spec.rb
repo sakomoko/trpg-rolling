@@ -20,10 +20,10 @@ require 'spec_helper'
 
 describe RoomsController do
 
-  let(:user) { Factory :user}
-  named_let(:room) { Factory :room, :user => user }
-  let(:valid_attributes) { Factory.attributes_for(:room) }
-  let(:world) { Factory :world, :owner => user}
+  let(:user) { FactoryGirl.create :user}
+  named_let(:room) { FactoryGirl.create :room, :user => user }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:room) }
+  let(:world) { FactoryGirl.create :world, :owner => user}
 
   describe "GET index" do
     it "assigns all rooms as @rooms" do
@@ -65,7 +65,7 @@ describe RoomsController do
 
   describe "POST create" do
 
-    let(:room) { Factory.attributes_for :room }
+    let(:room) { FactoryGirl.attributes_for :room }
 
     context "When user logged in" do
       before do
@@ -174,7 +174,7 @@ describe RoomsController do
   end
 
   describe "PUT close" do
-    named_let(:room) { Factory :room, :user => user, :roomable => world }
+    named_let(:room) { FactoryGirl.create :room, :user => user, :roomable => world }
     before do
       sign_in user
       put :close, { :id => room.to_param, :world_id => world.to_param }

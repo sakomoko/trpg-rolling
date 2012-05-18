@@ -13,7 +13,7 @@ describe GameSystem do
     let(:ability) { Ability.new(user) }
 
     context "When editing by admin" do
-      let(:user) { Factory :user, :role => 'admin' }
+      let(:user) { FactoryGirl.create :user, :role => 'admin' }
       it { should be_able_to(:manage, GameSystem.new)}
     end
 

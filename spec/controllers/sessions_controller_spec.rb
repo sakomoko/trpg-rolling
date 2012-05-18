@@ -20,10 +20,10 @@ require 'spec_helper'
 
 describe SessionsController do
 
-  let(:user) { Factory :user }
-  let(:session) { Factory :session, :game_master => user }
-  let(:other_world_session) { Factory :session }
-  let(:valid_attributes) { Factory.build(:session, :world => session.world).attributes.symbolize_keys}
+  let(:user) { FactoryGirl.create :user }
+  let(:session) { FactoryGirl.create :session, :game_master => user }
+  let(:other_world_session) { FactoryGirl.create :session }
+  let(:valid_attributes) { FactoryGirl.build(:session, :world => session.world).attributes.symbolize_keys}
 
   subject { assigns(:session) }
 
@@ -37,7 +37,7 @@ describe SessionsController do
   end
 
   describe "GET finished" do
-    let(:session) { Factory :session, finished: true }
+    let(:session) { FactoryGirl.create :session, finished: true }
     subject { assigns(:sessions) }
     before do
       get :finished, :world_id => session.world.to_param

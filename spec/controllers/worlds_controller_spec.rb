@@ -20,9 +20,9 @@ require 'spec_helper'
 
 describe WorldsController do
 
-  let(:user) { Factory :user }
-  let(:world) { Factory :world, :owner => user }
-  let(:valid_attributes) { Factory.build(:world, :owner => nil).attributes.symbolize_keys }
+  let(:user) { FactoryGirl.create :user }
+  let(:world) { FactoryGirl.create :world, :owner => user }
+  let(:valid_attributes) { FactoryGirl.build(:world, :owner => nil).attributes.symbolize_keys }
 
   describe "GET index" do
     it "assigns all worlds as @worlds" do
