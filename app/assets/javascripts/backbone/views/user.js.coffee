@@ -13,9 +13,16 @@ class TrpgRolling.Views.Users extends Backbone.View
   initialize: (options) ->
     @room = options.room
     @collection.on "add", @addUser, @
+    @collection.on "remove", @removeUser, @
+
+  changeUserCount: () ->
+    $("#num-users-#{@room.id}").text(@collection.length)
 
   addUser: (user) ->
-    $("#num-users-#{@room.id}").text(@collection.length)
+    @changeUserCount()
     view = new TrpgRolling.Views.User
       model: user
     @$el.append view.render()
+
+  removeUser: () ->
+    @changeUserCount()
