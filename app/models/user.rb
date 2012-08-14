@@ -49,6 +49,8 @@ class User
 
   has_many :rooms
 
+  before_save :reset_authentication_token
+
   def admin?
     role == 'admin'
   end

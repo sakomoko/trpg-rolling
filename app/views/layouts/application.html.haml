@@ -18,7 +18,7 @@
     %link{:href => "images/apple-touch-icon.png", :rel => "apple-touch-icon"}/
     %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
     %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
-
+    = javascript_include_tag "application"
 
   %body
     .navbar.navbar-fixed-top
@@ -36,13 +36,7 @@
     .container-fluid
 
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+        = yield :sidebar
         .span9
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_#{name}", :class => "alert" if msg.is_a?(String)
@@ -50,8 +44,3 @@
     
       %footer
         %p &copy; Company 2012
-    /
-      Le javascript
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"

@@ -1,3 +1,22 @@
+= javascript_tag do
+  $(function() {
+  window.app = new TrpgRolling.ChatApp();
+  window.app.firstLoad =
+  != @room.to_json
+  ;
+  });
+
+
+- content_for :sidebar do
+  .span3
+    .well.sidebar-nav
+      %ul.nav.nav-list#rooms-nav
+        %li.nav-header Rooms
+      %ul.nav.nav-list{id: "users-nav-#{@room.id}"}
+        %li.nav-header
+          Users(
+          %span{id: "num-users-#{@room.id}"} 0
+          )
 
 %h2
   = @room.title
@@ -30,10 +49,15 @@
 
 %div.form-actions
   - unless @room.closed?
-    %a.btn.btn-success{href: "#"}
+    %a.btn.btn-success{href: "#", id: "join", :data => {:id  => @room.id} }
       %i.icon-plus-sign.icon-white
       %b Join Room
 
   = back_from_room @room.roomable
 
-%div{id: "room-messages-#{@room.id}"}
+%div(style="display:none" id="input")
+  %form.well
+    %input{:type => 'text', :class => 'span6', :placeholder => 'Message...'}
+    %button{:type => 'submit', :class => 'btn'} Send
+
+%div.well#chat-container

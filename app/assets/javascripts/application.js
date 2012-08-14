@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require socket.io.min
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
