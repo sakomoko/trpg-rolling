@@ -1,1 +1,1 @@
-[![Build Status](https://secure.travis-ci.org/sakomoko/trpg-rolling.png?branch=master)](http://travis-ci.org/sakomoko/trpg-rolling)
+[![Build Status](https://secure.travis-ci.org/sakomoko/trpg-rolling.png?branch=master)](http://travis-ci.org/sakomoko/trpg-rolling) [![Dependency Status](https://gemnasium.com/sakomoko/trpg-rolling.png)](https://gemnasium.com/sakomoko/trpg-rolling)
