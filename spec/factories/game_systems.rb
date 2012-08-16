@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   sequence :game_system_name do |n|
-    "TestGameSystem#{n}}"
+    "TestGameSystem#{n}"
   end
 
   factory :game_system do
