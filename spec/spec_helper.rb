@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'database_cleaner'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -40,13 +41,15 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
 
     # Clean up the database
-    require 'database_cleaner'
     config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-      DatabaseCleaner.orm = "mongoid"
+      DatabaseCleaner[:mongoid].strategy = :truncation
     end
 
     config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
       DatabaseCleaner.clean
     end
   end

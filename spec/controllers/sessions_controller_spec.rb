@@ -107,6 +107,7 @@ describe SessionsController do
 
       context "with invalid params" do
         before do
+          session
           Session.any_instance.stub(:save).and_return(false)
           post :create, {:session => {}, :world_id => session.world.to_param }
         end
@@ -142,6 +143,7 @@ describe SessionsController do
 
       context "with invalid params" do
         before do
+          session
           Session.any_instance.stub(:save).and_return(false)
           put :update, {:id => session.to_param, :session => {}, :world_id => session.world.to_param }
         end

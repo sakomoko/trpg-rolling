@@ -136,6 +136,7 @@ describe WorldsController do
     describe "with invalid params" do
       it "assigns the world as @world" do
         # Trigger the behavior that occurs when invalid params are submitted
+        world
         World.any_instance.stub(:save).and_return(false)
         put :update, {:id => world.to_param, :world => {}}
         assigns(:world).should eq(world)
@@ -143,6 +144,7 @@ describe WorldsController do
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
+        world
         World.any_instance.stub(:save).and_return(false)
         put :update, {:id => world.to_param, :world => {}}
         response.status.should eq 302

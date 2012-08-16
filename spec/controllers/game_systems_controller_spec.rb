@@ -133,15 +133,14 @@ describe GameSystemsController do
 
     describe "with invalid params" do
       it "assigns the game_system as @game_system" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        GameSystem.any_instance.stub(:save).and_return(false)
         put :update, {:id => game_system.to_param, :game_system => {}}
         assigns(:game_system).should eq(game_system)
       end
 
       it "re-renders the 'edit' template" do
+        game_system
         # Trigger the behavior that occurs when invalid params are submitted
-        GameSystem.any_instance.stub(:save).and_return(false)
+        GameSystem.any_instance.stub(:update_attributes).and_return(false)
         put :update, {:id => game_system.to_param, :game_system => {}}
         response.should render_template("edit")
       end
