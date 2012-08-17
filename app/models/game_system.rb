@@ -7,4 +7,5 @@ class GameSystem
   validates_uniqueness_of :name
 
   attr_accessible :name, :description
+  attr_accessible *accessible_attributes, as: :admin
 end

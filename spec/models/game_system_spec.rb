@@ -6,7 +6,17 @@ describe GameSystem do
   describe "attr_accesible" do
     it { should be_accessible :name }
     it { should be_accessible :description }
+
+    it { should_not be_accessible :id }
   end
+
+  describe "admin attr_accesible" do
+    it { should be_admin_accessible :name }
+    it { should be_admin_accessible :description }
+
+    it { should_not be_admin_accessible :id }
+  end
+
 
   describe "ability" do
     subject { ability }
