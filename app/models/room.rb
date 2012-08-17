@@ -10,7 +10,7 @@ class Room
   field :closed_at, :type => DateTime
 
   belongs_to :user
-  belongs_to :roomable, polymorphic: true
+  belongs_to :roomable, polymorphic: true, inverse_of: :rooms
   validates_presence_of :title, :user_id
 
   scope :opened, where(:closed => false)
@@ -18,6 +18,7 @@ class Room
   scope :closed, where(:closed => true)
 
   attr_accessible :title, :description, :static
+  attr_accessible *accessible_attributes, :user_id, :roomable_id,:roomable_type, :closed, :closed_at, as: :admin
 
   class << self
 

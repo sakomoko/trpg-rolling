@@ -17,6 +17,20 @@ describe Room do
     it { should_not be_accessible :closed_at }
   end
 
+  describe "admin attr_accesible" do
+    it { should be_admin_accessible :title }
+    it { should be_admin_accessible :description }
+    it { should be_admin_accessible :static }
+    it { should be_admin_accessible :user_id }
+    it { should be_admin_accessible :roomable_id }
+    it { should be_admin_accessible :roomable_type }
+    it { should be_admin_accessible :closed }
+    it { should be_admin_accessible :closed_at }
+
+    it { should_not be_admin_accessible :id }
+  end
+
+
   describe '#find_parent' do
     context 'paramsにsession_idが含まれていたとき' do
       let(:session) { FactoryGirl.create :session }
