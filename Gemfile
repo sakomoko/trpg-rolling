@@ -7,7 +7,6 @@ gem 'rails', '3.2.2'
 
 gem "jquery-rails"
 gem "mongoid", "~> 3.0.4"
-gem "bson_ext", "~> 1.3"
 gem "haml-rails"
 gem 'devise'
 
