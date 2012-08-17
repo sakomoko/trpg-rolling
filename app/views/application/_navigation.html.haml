@@ -1,12 +1,23 @@
-- if user_signed_in?
-  %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'
-- else
-  %li= link_to 'login', new_user_session_path
-- if user_signed_in?
-  %li= link_to 'edit account', edit_user_registration_path
-- else
-  %li= link_to 'sign up', new_user_registration_path
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      = link_to 'TrpgRolling', root_path, class: "brand"
+      %ul.nav
+        %li= link_to 'Worlds', worlds_path
+        %li= link_to 'Rooms', rooms_path
+        %li= link_to 'GameSystems', game_systems_path
 
-%li= link_to 'Worlds', worlds_path
-%li= link_to 'Rooms', rooms_path
-%li= link_to 'GameSystems', game_systems_path
+      - if user_signed_in?
+        %ul.nav.pull-right
+          %li.dropdown
+            %a(href="#" class="dropdown-toggle" data-toggle="dropdown")
+              %b
+                = current_user.name
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'
+              %li= link_to 'edit account', edit_user_registration_path
+      - else
+        %ul.nav
+          %li= link_to 'sign up', new_user_registration_path
+          %li= link_to 'login', new_user_session_path
