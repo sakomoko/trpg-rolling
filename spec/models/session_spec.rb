@@ -22,6 +22,25 @@ describe Session do
     it { should_not be_accessible :updated_at }
   end
 
+  describe "admin attr_accesible" do
+    it { should be_admin_accessible :title }
+    it { should be_admin_accessible :description }
+    it { should be_admin_accessible :started_at }
+    it { should be_admin_accessible :finished_at }
+    it { should be_admin_accessible :guidelines }
+    it { should be_admin_accessible :published }
+
+    it { should be_admin_accessible :world_id }
+    it { should be_admin_accessible :game_master_id }
+
+    it { should be_admin_accessible :finished }
+    it { should be_admin_accessible :closed_at }
+    it { should be_admin_accessible :created_at }
+    it { should be_admin_accessible :updated_at }
+
+    it { should_not be_admin_accessible :id }
+  end
+
 
   describe "ability" do
     subject { ability }
