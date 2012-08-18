@@ -12,4 +12,5 @@ class Message
   validates_presence_of :user, :room, :body
 
   attr_accessible :body, :supplement, :alias
+  attr_accessible *accessible_attributes, :dice, :user_id, :room_id, :created_at, :updated_at, as: :admin
 end
