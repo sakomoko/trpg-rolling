@@ -12,6 +12,7 @@ TrpgRolling::Application.routes.draw do
     resources :rooms do
       put :close, :on => :member
     end
+    resources :characters
   end
 
   resources :sessions, :only => :none do
@@ -21,7 +22,9 @@ TrpgRolling::Application.routes.draw do
     resources :comments
   end
 
-  resources :users, :only => :show
+  resources :users, :only => :show do
+    resources :characters, only: [:index, :show]
+  end
 
   match "user", :controller => :users, :action => :info
 
