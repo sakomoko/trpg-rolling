@@ -4,8 +4,8 @@ class Character
   include Mongoid::Timestamps
 
   belongs_to :user
-  belongs_to :game_system_id
-  belongs_to :world_id
+  belongs_to :game_system
+  belongs_to :world
 
   field :name, type: String
   field :sex, type: Integer
