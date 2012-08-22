@@ -5,12 +5,13 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+gem "therubyracer"
 gem "jquery-rails"
 gem "mongoid", "~> 3.0.4"
 gem "haml-rails"
 gem 'devise'
 
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form', "~> 2.0.0"
 gem "responders"
 gem "cancan"
