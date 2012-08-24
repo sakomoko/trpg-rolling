@@ -7,6 +7,7 @@ class World
   belongs_to :game_system
   has_many :rooms, as: :roomable, inverse_of: :roomable
   has_many :sessions
+  has_many :characters
 
   field :name, :type => String
   field :description, :type => String
