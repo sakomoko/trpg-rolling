@@ -8,5 +8,6 @@ FactoryGirl.define do
   factory :game_system do
     name {FactoryGirl.generate :game_system_name}
     description "MyString"
+    system_key { name }
   end
 end
