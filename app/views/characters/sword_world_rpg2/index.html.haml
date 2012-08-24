@@ -1,0 +1,16 @@
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Level
+    %th User
+    %th UpdatedAt
+  - @characters.each do |character|
+    %tr
+      %td= link_to character.name, world_character_url(character.world, character.id)
+      %td= character.level
+      %td
+        %i.icon-user
+        = link_to character.user.name, character.user
+      %td
+        %i.icon-time
+        = character.updated_at.to_s :db

@@ -1,0 +1,7 @@
+%h1 Listing Characters
+
+= render :file => "characters/#{@system_key}/index"
+
+.form-actions
+  = link_to "Create New Character", new_world_character_path(@world), class: "btn btn-primary"
+  = link_to "Back", @world, class: "btn"
