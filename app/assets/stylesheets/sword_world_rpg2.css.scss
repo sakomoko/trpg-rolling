@@ -1,0 +1,32 @@
+#sword_world_rpg2 {
+	form {
+		#params {
+			.main {
+				vertical-align: middle;
+				position: relative;
+				height: 70px;
+
+				.wrap {
+					position:absolute;
+					top: 25%;
+				}
+			}
+			[id*="grow"], [id*="bonus"] {
+				input {
+					width: 30px;
+				}
+			}
+			div[id*="grow"] {
+				margin-left: 45px;
+			}
+			div[id*="sub"] {
+				margin-left: 45px;
+			}
+
+			.row {
+				margin-top: 7px;
+				margin-bottom: 7px;
+			}
+		}
+	}
+}

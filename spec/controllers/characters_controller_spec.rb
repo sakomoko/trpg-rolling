@@ -17,4 +17,14 @@ describe CharactersController do
     it { assigns(:world).should eq character.world }
     it { assigns(:system_key).should eq game_system.system_key.underscore }
   end
+
+  describe "GET new" do
+    subject { assigns :character }
+    before do
+      get :new, world_id: world.to_param
+    end
+    it { should be_new_record }
+    it { assigns(:world).should eq character.world }
+    it { assigns(:system_key).should eq game_system.system_key.underscore }
+  end
 end

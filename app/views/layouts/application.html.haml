@@ -24,7 +24,7 @@
     = render "navigation"
 
     .container
-      .row-fluid
+      .row
         = yield :sidebar
         %div(class="#{content_for?(:sidebar) ? 'span9' : 'span12'}")
           - flash.each do |name, msg|

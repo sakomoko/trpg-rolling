@@ -1,0 +1,116 @@
+#sword_world_rpg2
+  = simple_form_for(@character, url: world_characters_path(@world, @character), :html => { :class => 'form-horizontal' }) do |f|
+
+    = f.input :name
+    = f.input :sex, :collection => [:male, :female]
+    = f.input :age, as: :integer, :input_html => {class: "span1"}
+
+    = f.input :race, :label => "種族"
+    = f.input :race_bonus, :label => "種族特性"
+    = f.input :birth, :label => "生まれ"
+
+    = f.input :records, label: "経歴" do
+      - 3.times do |n|
+        = f.input_field :records, name: "#{f.object_name}[records][#{n}]", id: "#{f.object_name}_records_#{n}"
+
+    = f.input :pollution, :label => "穢れ", as: :integer
+    = f.input :experience, :label => "経験点", as: :integer
+    = f.input :total_experience, :label => "総経験点", as: :integer
+    = f.input :honor, label: "名誉点", as: :integer
+    = f.input :total_honor, label: "総名誉点", as: :integer
+    = f.input :hp_bonus, label: "HP修正値", as: :integer
+    = f.input :mp_bonus, label: "MP修正値", as: :integer
+
+    #params
+      .row
+        #technique.main.span1
+          .wrap.input-prepend
+            %span.add-on 技
+            = f.number_field :technique, class: "span1"
+
+        #technique-sub.span1
+          .input-prepend
+            %span.add-on A
+            = f.number_field :sub_a, class: "span1"
+          .input-prepend
+            %span.add-on B
+            = f.number_field :sub_b, class: "span1"
+
+        #technique-grow.span1
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_dexterity, class: "span1"
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_agility, class: "span1"
+        #technique-bonus.span1
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :dexterity_bonus, class: "span1"
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :agility_bonus, class: "span1"
+
+
+      .row
+        #physique.main.span1
+          .wrap.input-prepend
+            %span.add-on 体
+            = f.number_field :physique, class: "span1"
+
+        #physique-sub.span1
+          .input-prepend
+            %span.add-on C
+            = f.number_field :sub_c, class: "span1"
+          .input-prepend
+            %span.add-on D
+            = f.number_field :sub_d, class: "span1"
+
+        #physique-grow.span1
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_strength, class: "span1"
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_vitality, class: "span1"
+        #physique-bonus.span1
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :strength_bonus, class: "span1"
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :vitality_bonus, class: "span1"
+
+
+      .row
+        #heart.main.span1
+          .wrap.input-prepend
+            %span.add-on 心
+            = f.number_field :heart, class: "span1"
+
+        #heart-sub.span1
+          .input-prepend
+            %span.add-on E
+            = f.number_field :sub_e, class: "span1"
+          .input-prepend
+            %span.add-on F
+            = f.number_field :sub_f, class: "span1"
+
+        #heart-grow.span1
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_intelligence, class: "span1"
+          .input-prepend
+            %span.add-on 成長
+            = f.number_field :grow_mind, class: "span1"
+        #heart-bonus.span1
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :intelligence_bonus, class: "span1"
+          .input-prepend
+            %span.add-on 修正
+            = f.number_field :mind_bonus, class: "span1"
+
+
+    .form-actions
+      = f.button :submit, class: "btn btn-primary"
