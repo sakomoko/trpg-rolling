@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe SwordWorldRpg2 do
+  describe "associations" do
+    it { should embed_many(:acquired_skills) }
+  end
+
   describe "attr_accesible" do
     it { should be_accessible :name }
     it { should be_accessible :sex }

@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe SwordWorldRpg2::Skill do
+  describe "associations" do
+#    it { should have_many(:acquired_skills).of_type(SwordWorldRpg2::AcquiredSkill) }
+  end
   describe "fields" do
     it { should have_field(:name).of_type(String) }
     it { should have_field(:has_mp).of_type(Boolean).with_default_value_of(false) }
@@ -8,7 +11,6 @@ describe SwordWorldRpg2::Skill do
 
   describe "validations" do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:has_mp) }
   end
 
   describe "mass assigment" do
