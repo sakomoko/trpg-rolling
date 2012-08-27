@@ -26,6 +26,7 @@ class Session
   scope :playing, where(:finished => false)
 
   attr_accessible :title, :description, :started_at, :finished_at, :guidelines, :published
+  attr_accessible :comments_attributes
   attr_accessible *accessible_attributes, :world_id, :game_master_id, :finished, :closed_at, :created_at, :updated_at, as: :admin
 
   alias :owner :game_master
