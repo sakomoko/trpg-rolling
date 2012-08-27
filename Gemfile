@@ -5,7 +5,6 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem "therubyracer"
 gem "jquery-rails"
 gem "mongoid", "~> 3.0.4"
 gem "haml-rails"
@@ -17,7 +16,7 @@ gem "responders"
 gem "cancan"
 gem "redcarpet"
 gem "rails-backbone"
-gem "rails_admin"
+gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git"
 
 # Gems used only for assets and not required
 # in production environments by default.
