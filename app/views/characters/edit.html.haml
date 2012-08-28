@@ -1,0 +1,6 @@
+%h1 Edit Character
+
+= render :file => "characters/#{@system_key}/_form"
+
+.form-actions
+  = link_to "Back", @world, class: "btn"

@@ -10,8 +10,8 @@
     = f.input :birth, :label => "生まれ"
 
     = f.input :records, label: "経歴" do
-      - 3.times do |n|
-        = f.input_field :records, name: "#{f.object_name}[records][#{n}]", id: "#{f.object_name}_records_#{n}"
+      - @character.records.each do |record|
+        = f.input_field :records, name: "#{f.object_name}[records][]", value: record
 
     = f.input :pollution, :label => "穢れ", as: :integer
     = f.input :experience, :label => "経験点", as: :integer

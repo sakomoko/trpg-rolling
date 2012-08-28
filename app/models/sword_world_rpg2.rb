@@ -10,7 +10,7 @@ class SwordWorldRpg2 < Character
   field :pollution, type: Integer
 
   field :race_bonus, type: Array
-  field :records, type: Array
+  field :records, type: Array, default: ["", "", ""]
 
   field :level, type: Integer, default: 1
   field :experience, type: Integer, default: 0

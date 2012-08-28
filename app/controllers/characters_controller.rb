@@ -15,4 +15,11 @@ class CharactersController < ApplicationController
     @character = model.new
     respond_with(@world, @character)
   end
+
+  def edit
+    @world = World.find params[:world_id]
+    @character = Character.find params[:id]
+    @system_key = @world.game_system.system_key.underscore
+    respond_with @world, @character
+  end
 end
