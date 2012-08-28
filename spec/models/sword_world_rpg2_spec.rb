@@ -7,7 +7,7 @@ describe SwordWorldRpg2 do
 
   describe "attr_accesible" do
     it { should be_accessible :name }
-    it { should be_accessible :sex }
+    it { should be_accessible :gender }
     it { should be_accessible :age }
 
     it { should be_accessible :technique }

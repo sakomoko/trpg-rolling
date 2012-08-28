@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Character do
   describe "attr_accesible" do
     it { should be_accessible :name }
-    it { should be_accessible :sex }
+    it { should be_accessible :gender }
     it { should be_accessible :age }
 
     it { should_not be_accessible :user_id }
@@ -13,7 +13,7 @@ describe Character do
 
   describe "admin attr_accesible" do
     it { should be_admin_accessible :name }
-    it { should be_admin_accessible :sex }
+    it { should be_admin_accessible :gender }
     it { should be_admin_accessible :age }
 
     it { should be_admin_accessible :user_id }

@@ -8,9 +8,9 @@ class Character
   belongs_to :world
 
   field :name, type: String
-  field :sex, type: Integer
+  field :gender, type: Symbol, default: :male
   field :age, type: Integer
 
-  attr_accessible :name, :sex, :age
+  attr_accessible :name, :gender, :age
   attr_accessible *accessible_attributes, :user_id, :game_system_id, :world_id, :created_at, :updated_at, as: :admin
 end

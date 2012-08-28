@@ -2,7 +2,7 @@
   = simple_form_for(@character, url: world_characters_path(@world, @character), :html => { :class => 'form-horizontal' }) do |f|
 
     = f.input :name
-    = f.input :sex, :collection => [:male, :female]
+    = f.input :gender, :collection => [:male, :female], as: :radio_buttons
     = f.input :age, as: :integer, :input_html => {class: "span1"}
 
     = f.input :race, :label => "種族"
