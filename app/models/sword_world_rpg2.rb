@@ -22,7 +22,6 @@ class SwordWorldRpg2 < Character
   field :hp_bonus, type: Integer, default: 0
   field :mp_bonus, type: Integer, default: 0
 
-
   field :technique, type: Integer, default: 0
   field :heart, type: Integer, default: 0
   field :physique, type: Integer, default: 0

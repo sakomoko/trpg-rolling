@@ -1,5 +1,5 @@
 #sword_world_rpg2
-  = simple_form_for(@character, url: world_characters_path(@world, @character), :html => { :class => 'form-horizontal' }) do |f|
+  = simple_nested_form_for(@character, url: world_characters_path(@world, @character), :html => { :class => 'form-horizontal' }) do |f|
 
     = f.input :name
     = f.input :gender, :collection => [:male, :female], as: :radio_buttons
@@ -110,6 +110,19 @@
           .input-prepend
             %span.add-on 修正
             = f.number_field :mind_bonus, class: "span1"
+
+    #skills
+      %h3 Skills
+      - @skills = SwordWorldRpg2::Skill.all.cache
+      = f.fields_for :acquired_skills do |s|
+        .row
+          .span2
+            = s.input :skill_id, as: :select, collection: @skills, input_html: { class: "span2"}
+            = s.input :level, as: :integer, input_html: { class: "span1"}
+          .span1.offset2.remove
+            = s.link_to_remove '<span class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i></span>'.html_safe
+        %hr
+      = f.link_to_add "<i class=\"icon-plus icon-white\"></i>技能を追加する".html_safe, :acquired_skills, {class: "btn btn-info"}
 
 
     .form-actions
