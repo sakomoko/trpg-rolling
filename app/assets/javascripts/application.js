@@ -13,4 +13,5 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/trpg_rolling
+//= require jquery_nested_form
 //= require_tree .

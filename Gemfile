@@ -17,6 +17,7 @@ gem "cancan"
 gem "redcarpet"
 gem "rails-backbone"
 gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git"
+gem "bbenezech-nested_form"
 
 # Gems used only for assets and not required
 # in production environments by default.
