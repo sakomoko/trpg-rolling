@@ -1,5 +1,5 @@
 class SwordWorldRpg2 < Character
-
+  has_and_belongs_to_many :combat_skills, class_name: "SwordWorldRpg2::CombatSkill"
   embeds_many :acquired_skills, class_name: "SwordWorldRpg2::AcquiredSkill", inverse_of: :sword_world_rpg2
   accepts_nested_attributes_for :acquired_skills, :allow_destroy => true
 
@@ -42,6 +42,7 @@ class SwordWorldRpg2 < Character
   attr_accessible :grow_dexterity, :grow_agility, :grow_strength, :grow_vitality, :grow_intelligence, :grow_mind
   attr_accessible :dexterity_bonus, :agility_bonus, :strength_bonus, :vitality_bonus, :intelligence_bonus, :mind_bonus
   attr_accessible :acquired_skills_attributes
+  attr_accessible :combat_skill_ids
   attr_accessible *accessible_attributes, as: :admin
 
   def method_missing(method, *args)
