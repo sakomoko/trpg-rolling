@@ -124,6 +124,10 @@
         %hr
       = f.link_to_add "<i class=\"icon-plus icon-white\"></i>技能を追加する".html_safe, :acquired_skills, {class: "btn btn-info"}
 
+    #combat_skills
+      %h3 戦闘特技
+      - @combat_skills = SwordWorldRpg2::CombatSkill.all.cache
+      = f.input :combat_skills, as: :select, collection: @combat_skills, :input_html => { :multiple => true, "data-placeholder" => "戦闘特技を検索" ,class: "chzn-select" }
 
     .form-actions
       = f.button :submit, class: "btn btn-primary"

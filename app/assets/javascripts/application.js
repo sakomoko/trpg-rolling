@@ -14,4 +14,5 @@
 //= require backbone_datalink
 //= require backbone/trpg_rolling
 //= require jquery_nested_form
+//= require chosen.jquery.min
 //= require_tree .
