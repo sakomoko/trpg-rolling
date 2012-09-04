@@ -25,4 +25,13 @@ describe SwordWorldRpg2::CombatSkill do
 
     it { should validate_presence_of(:description) }
   end
+
+  describe "create_seed_data" do
+    subject { SwordWorldRpg2::CombatSkill.count}
+    let(:skills) {YAML.load_file "#{Rails.root}/db/seeds/sword_world_rpg2/combat_skills.yml"}
+    before do
+      SwordWorldRpg2::CombatSkill.create_seed_data
+    end
+    it { should eq skills.count }
+  end
 end
