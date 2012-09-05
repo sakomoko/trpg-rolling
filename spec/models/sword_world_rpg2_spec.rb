@@ -4,6 +4,7 @@ describe SwordWorldRpg2 do
   describe "associations" do
     it { should have_and_belong_to_many(:combat_skills).of_type(SwordWorldRpg2::CombatSkill) }
     it { should embed_many(:acquired_skills) }
+    it { should embed_many(:abilities).of_type(SwordWorldRpg2::Ability) }
   end
 
   describe "attr_accesible" do

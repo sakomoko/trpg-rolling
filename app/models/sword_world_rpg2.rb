@@ -1,6 +1,7 @@
 class SwordWorldRpg2 < Character
   has_and_belongs_to_many :combat_skills, class_name: "SwordWorldRpg2::CombatSkill"
   embeds_many :acquired_skills, class_name: "SwordWorldRpg2::AcquiredSkill", inverse_of: :sword_world_rpg2
+  embeds_many :abilities, class_name: "SwordWorldRpg2::Ability", inverse_of: :character
   accepts_nested_attributes_for :acquired_skills, :allow_destroy => true
 
   STATUS = { dexterity: [:technique, :a], agility: [:technique, :b], strength: [:physique, :c], vitality: [:physique, :d], intelligence: [:heart, :e], mind: [:heart, :f] }
