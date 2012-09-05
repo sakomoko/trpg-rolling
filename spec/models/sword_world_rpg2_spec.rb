@@ -24,6 +24,7 @@ describe SwordWorldRpg2 do
     it { should be_accessible :sub_f }
 
     it { should be_accessible :acquired_skills_attributes }
+    it { should be_accessible :abilities_attributes }
     it { should be_accessible :combat_skill_ids }
 
     it { should_not be_accessible :user_id }
