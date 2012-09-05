@@ -111,8 +111,10 @@
             %span.add-on 修正
             = f.number_field :mind_bonus, class: "span1"
 
+    %hr
+
     #skills
-      %h3 Skills
+      %h3 冒険者技能
       - @skills = SwordWorldRpg2::Skill.all.cache
       = f.fields_for :acquired_skills do |s|
         .row
@@ -123,6 +125,8 @@
             = s.link_to_remove '<span class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i></span>'.html_safe
         %hr
       = f.link_to_add "<i class=\"icon-plus icon-white\"></i>技能を追加する".html_safe, :acquired_skills, {class: "btn btn-info"}
+
+    %hr
 
     #combat_skills
       %h3 戦闘特技

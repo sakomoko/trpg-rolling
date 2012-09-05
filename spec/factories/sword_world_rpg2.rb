@@ -7,7 +7,6 @@ FactoryGirl.define do
     pollution 0
     race_bonus ["divine protection"]
     records ["Record1", "Record2", "Record3"]
-    level 2
     experience 3000
     total_experience 4500
     honor 10

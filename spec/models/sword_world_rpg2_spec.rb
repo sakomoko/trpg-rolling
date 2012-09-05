@@ -30,6 +30,16 @@ describe SwordWorldRpg2 do
     it { should_not be_accessible :world_id }
   end
 
+  describe "fields" do
+    it { should have_fields(:race, :race_bonus, :birth).of_type(String) }
+    it { should have_field(:records).of_type(Array).with_default_value_of(["", "", ""])}
+    it { should have_fields(:pollution, :experience, :total_experience, :honor, :total_honor).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:hp_bonus, :mp_bonus, :technique, :heart, :physique).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:sub_a, :sub_b, :sub_c, :sub_d, :sub_e, :sub_f).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:grow_dexterity, :grow_agility, :grow_vitality, :grow_strength, :grow_intelligence, :grow_mind).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:dexterity_bonus, :agility_bonus, :vitality_bonus, :strength_bonus, :intelligence_bonus, :mind_bonus).of_type(Integer).with_default_value_of(0) }
+  end
+
   describe "status" do
     let(:character) { FactoryGirl.create :sword_world_rpg2 }
     subject { character }
