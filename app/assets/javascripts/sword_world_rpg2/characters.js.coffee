@@ -1,2 +1,2 @@
 jQuery ->
-  $("#combat_skills .chzn-select").chosen()
+  $("#combat-skills .chzn-select").chosen()

@@ -123,12 +123,23 @@
             = s.input :level, as: :integer, input_html: { class: "span1"}
           .span1.offset2.remove
             = s.link_to_remove '<span class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i></span>'.html_safe
-        %hr
       = f.link_to_add "<i class=\"icon-plus icon-white\"></i>技能を追加する".html_safe, :acquired_skills, {class: "btn btn-info"}
 
     %hr
 
-    #combat_skills
+    #function-skills
+      %h3 一般技能
+      = f.fields_for :function_skills do |s|
+        .row
+          .span2
+            = s.input :name
+            = s.input :level, as: :integer
+          .span1.offset2.remove
+            = s.link_to_remove '<span class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i></span>'.html_safe
+      = f.link_to_add "<i class=\"icon-plus icon-white\"></i>技能を追加する".html_safe, :function_skills, {class: "btn btn-info"}
+    %hr
+
+    #combat-skills
       %h3 戦闘特技
       - @combat_skills = SwordWorldRpg2::CombatSkill.all.cache
       = f.input :combat_skills, as: :select, collection: @combat_skills, :input_html => { :multiple => true, "data-placeholder" => "戦闘特技を検索" ,class: "chzn-select" }
@@ -158,5 +169,6 @@
       = f.input :profile, as: :text, input_html: {class: "span5"}, label: "プロフィール"
       = f.input :memo, as: :text, input_html: {class: "span5"}, label: "メモ"
     %hr
+
     .form-actions
       = f.button :submit, class: "btn btn-primary"
