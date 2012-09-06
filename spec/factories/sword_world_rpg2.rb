@@ -28,11 +28,11 @@ FactoryGirl.define do
     grow_vitality 0
     grow_intelligence 0
     grow_mind 0
-    dexterity_bonus 0
-    agility_bonus 0
-    strength_bonus 1
-    vitality_bonus 0
-    intelligence_bonus 0
-    mind_bonus 0
+    dexterity_equipment 0
+    agility_equipment 0
+    strength_equipment 1
+    vitality_equipment 0
+    intelligence_equipment 0
+    mind_equipment 0
   end
 end

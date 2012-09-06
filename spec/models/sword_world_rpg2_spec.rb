@@ -23,6 +23,12 @@ describe SwordWorldRpg2 do
     it { should be_accessible :sub_e }
     it { should be_accessible :sub_f }
 
+    it { should be_accessible :equipments }
+    it { should be_accessible :items }
+    it { should be_accessible :honor_items }
+    it { should be_accessible :profile }
+    it { should be_accessible :memo }
+
     it { should be_accessible :acquired_skills_attributes }
     it { should be_accessible :abilities_attributes }
     it { should be_accessible :combat_skill_ids }
@@ -39,7 +45,9 @@ describe SwordWorldRpg2 do
     it { should have_fields(:hp_bonus, :mp_bonus, :technique, :heart, :physique).of_type(Integer).with_default_value_of(0) }
     it { should have_fields(:sub_a, :sub_b, :sub_c, :sub_d, :sub_e, :sub_f).of_type(Integer).with_default_value_of(0) }
     it { should have_fields(:grow_dexterity, :grow_agility, :grow_vitality, :grow_strength, :grow_intelligence, :grow_mind).of_type(Integer).with_default_value_of(0) }
-    it { should have_fields(:dexterity_bonus, :agility_bonus, :vitality_bonus, :strength_bonus, :intelligence_bonus, :mind_bonus).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:dexterity_equipment, :agility_equipment, :vitality_equipment, :strength_equipment, :intelligence_equipment, :mind_equipment).of_type(Integer).with_default_value_of(0) }
+    it { should have_fields(:equipments, :items, :honor_items).of_type(String) }
+    it { should have_fields(:profile, :memo).of_type(String) }
   end
 
   describe "status" do
@@ -47,27 +55,27 @@ describe SwordWorldRpg2 do
     subject { character }
 
     context "dexterity" do
-      its(:dexterity) { should be_eql (character.technique + character.sub_a + character.grow_dexterity + character.dexterity_bonus) }
+      its(:dexterity) { should be_eql (character.technique + character.sub_a + character.grow_dexterity + character.dexterity_equipment) }
     end
 
     context "agility" do
-      its(:agility) { should be_eql (character.technique + character.sub_b + character.grow_agility + character.agility_bonus) }
+      its(:agility) { should be_eql (character.technique + character.sub_b + character.grow_agility + character.agility_equipment) }
     end
 
     context "strength" do
-      its(:strength) { should be_eql (character.physique + character.sub_c + character.grow_strength + character.strength_bonus) }
+      its(:strength) { should be_eql (character.physique + character.sub_c + character.grow_strength + character.strength_equipment) }
     end
 
     context "vitality" do
-      its(:vitality) { should be_eql (character.physique + character.sub_d + character.grow_vitality + character.vitality_bonus) }
+      its(:vitality) { should be_eql (character.physique + character.sub_d + character.grow_vitality + character.vitality_equipment) }
     end
 
     context "intelligence" do
-      its(:intelligence) { should be_eql (character.heart + character.sub_e + character.grow_intelligence + character.intelligence_bonus) }
+      its(:intelligence) { should be_eql (character.heart + character.sub_e + character.grow_intelligence + character.intelligence_equipment) }
     end
 
     context "mind" do
-      its(:mind) { should be_eql (character.heart + character.sub_f + character.grow_mind + character.mind_bonus) }
+      its(:mind) { should be_eql (character.heart + character.sub_f + character.grow_mind + character.mind_equipment) }
     end
   end
 end

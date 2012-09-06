@@ -26,13 +26,20 @@ class SwordWorldRpg2 < Character
   field :heart, type: Integer, default: 0
   field :physique, type: Integer, default: 0
 
+  field :equipments, type: String
+  field :items, type: String
+  field :honor_items, type: String
+
+  field :profile, type: String
+  field :memo, type: String
+
   ("a".."f").each do |status|
     field "sub_#{status}".to_sym, type: Integer, default: 0
   end
 
   STATUS.keys.each do |status|
     field "grow_#{status}".to_sym, type: Integer, default: 0
-    field "#{status}_bonus".to_sym, type: Integer, default: 0
+    field "#{status}_equipment".to_sym, type: Integer, default: 0
   end
 
   attr_accessible :race, :birth, :pollution, :race_bonus, :records
@@ -40,7 +47,8 @@ class SwordWorldRpg2 < Character
   attr_accessible :hp_bonus, :mp_bonus, :technique, :heart, :physique
   attr_accessible :sub_a, :sub_b, :sub_c, :sub_d, :sub_e, :sub_f
   attr_accessible :grow_dexterity, :grow_agility, :grow_strength, :grow_vitality, :grow_intelligence, :grow_mind
-  attr_accessible :dexterity_bonus, :agility_bonus, :strength_bonus, :vitality_bonus, :intelligence_bonus, :mind_bonus
+  attr_accessible :dexterity_equipment, :agility_equipment, :strength_equipment, :vitality_equipment, :intelligence_equipment, :mind_equipment
+  attr_accessible :equipments, :items, :honor_items, :profile, :memo
   attr_accessible :acquired_skills_attributes, :abilities_attributes
   attr_accessible :combat_skill_ids
   attr_accessible *accessible_attributes, as: :admin
@@ -48,7 +56,7 @@ class SwordWorldRpg2 < Character
   def method_missing(method, *args)
     super unless STATUS.include? method
     status = STATUS[method]
-    send("sub_#{status[1]}") + send(status[0]) + send("#{method}_bonus") + send("grow_#{method}")
+    send("sub_#{status[1]}") + send(status[0]) + send("#{method}_equipment") + send("grow_#{method}")
   end
 
 end
