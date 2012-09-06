@@ -132,6 +132,7 @@
       %h3 戦闘特技
       - @combat_skills = SwordWorldRpg2::CombatSkill.all.cache
       = f.input :combat_skills, as: :select, collection: @combat_skills, :input_html => { :multiple => true, "data-placeholder" => "戦闘特技を検索" ,class: "chzn-select" }
+    %hr
 
     #abilities
       %h3 練技・呪歌など
@@ -143,7 +144,19 @@
           .span1.offset2.remove
             = a.link_to_remove '<span class="btn btn-small btn-danger"><i class="icon-trash icon-white"></i></span>'.html_safe
       = f.link_to_add "<i class=\"icon-plus icon-white\"></i>練技等を追加する".html_safe, :abilities, {class: "btn btn-info"}
+    %hr
 
+    #items
+      %h3 装備／所持品
+      = f.input :honor_items, as: :text, input_html: {class: "span5"}, label: "名誉アイテム"
+      = f.input :equipments, as: :text, input_html: {class: "span5"}, label: "装備品"
+      = f.input :items, as: :text, input_html: {class: "span5"}, label: "所持品"
+    %hr
+
+    #profile
+      %h3 プロフィール／メモ
+      = f.input :profile, as: :text, input_html: {class: "span5"}, label: "プロフィール"
+      = f.input :memo, as: :text, input_html: {class: "span5"}, label: "メモ"
     %hr
     .form-actions
       = f.button :submit, class: "btn btn-primary"
