@@ -5,6 +5,7 @@ describe SwordWorldRpg2 do
     it { should have_and_belong_to_many(:combat_skills).of_type(SwordWorldRpg2::CombatSkill) }
     it { should embed_many(:acquired_skills) }
     it { should embed_many(:abilities).of_type(SwordWorldRpg2::Ability) }
+    it { should embed_many(:function_skills).of_type(SwordWorldRpg2::FunctionSkill) }
   end
 
   describe "attr_accesible" do
@@ -31,6 +32,7 @@ describe SwordWorldRpg2 do
 
     it { should be_accessible :acquired_skills_attributes }
     it { should be_accessible :abilities_attributes }
+    it { should be_accessible :function_skills_attributes }
     it { should be_accessible :combat_skill_ids }
 
     it { should_not be_accessible :user_id }

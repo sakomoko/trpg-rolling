@@ -2,7 +2,8 @@ class SwordWorldRpg2 < Character
   has_and_belongs_to_many :combat_skills, class_name: "SwordWorldRpg2::CombatSkill"
   embeds_many :acquired_skills, class_name: "SwordWorldRpg2::AcquiredSkill"
   embeds_many :abilities, class_name: "SwordWorldRpg2::Ability"
-  accepts_nested_attributes_for :acquired_skills, :abilities, :allow_destroy => true
+  embeds_many :function_skills, class_name: "SwordWorldRpg2::FunctionSkill"
+  accepts_nested_attributes_for :acquired_skills, :abilities, :function_skills, :allow_destroy => true
 
   STATUS = { dexterity: [:technique, :a], agility: [:technique, :b], strength: [:physique, :c], vitality: [:physique, :d], intelligence: [:heart, :e], mind: [:heart, :f] }
 
@@ -49,7 +50,7 @@ class SwordWorldRpg2 < Character
   attr_accessible :grow_dexterity, :grow_agility, :grow_strength, :grow_vitality, :grow_intelligence, :grow_mind
   attr_accessible :dexterity_equipment, :agility_equipment, :strength_equipment, :vitality_equipment, :intelligence_equipment, :mind_equipment
   attr_accessible :equipments, :items, :honor_items, :profile, :memo
-  attr_accessible :acquired_skills_attributes, :abilities_attributes
+  attr_accessible :acquired_skills_attributes, :abilities_attributes, :function_skills_attributes
   attr_accessible :combat_skill_ids
   attr_accessible *accessible_attributes, as: :admin
 
