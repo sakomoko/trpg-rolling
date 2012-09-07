@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :sword_world_rpg2 do
+    name "Test"
     race "Human"
     birth "Mercenary"
     pollution 0
