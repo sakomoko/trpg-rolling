@@ -3,4 +3,4 @@
 = render :file => "characters/#{@system_key}/_form"
 
 .form-actions
-  = link_to "Back", @world, class: "btn"
+  = link_to "Back", world_characters_path(@world), class: "btn"

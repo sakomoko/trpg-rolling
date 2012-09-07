@@ -38,4 +38,32 @@ describe CharactersController do
     it { assigns(:world).should eq character.world }
     it { assigns(:system_key).should eq game_system.system_key.underscore }
   end
+
+  describe "POST create" do
+    subject { assigns :character }
+    before do
+      post :create, world_id: world.to_param, sword_world_rpg2: FactoryGirl.attributes_for(:sword_world_rpg2, world: world)
+    end
+    it { should_not be_new_record }
+    it { should be_a(SwordWorldRpg2) }
+    it { should be_persisted }
+    it { assigns(:world).should eq world }
+    it { assigns(:system_key).should eq game_system.system_key.underscore }
+    it { response.should redirect_to(world_character_path(world, Character.last)) }
+  end
+
+  describe "PUT update" do
+    subject { assigns :character }
+    before do
+      put :update, id: character.to_param, world_id: world.to_param, sword_world_rpg2: FactoryGirl.attributes_for(:sword_world_rpg2, world: world)
+    end
+    it { should_not be_new_record }
+    it { should be_a(SwordWorldRpg2) }
+    it { should be_persisted }
+    it { should eq character }
+    it { assigns(:world).should eq world }
+    it { assigns(:system_key).should eq game_system.system_key.underscore }
+    it { response.should redirect_to(world_character_path(world, character)) }
+  end
+
 end

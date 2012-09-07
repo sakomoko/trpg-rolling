@@ -13,6 +13,8 @@ TrpgRolling::Application.routes.draw do
       put :close, :on => :member
     end
     resources :characters
+    resources :characters, as: :sword_world_rpg2
+    resources :characters, as: :sword_world_rpg
   end
 
   resources :sessions, :only => :none do
