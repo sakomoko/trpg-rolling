@@ -1,5 +1,9 @@
 class GameSystem
   include Mongoid::Document
+
+  has_many :characters
+  has_many :worlds
+
   field :name, :type => String
   field :description, :type => String
   field :system_key, :type => String, default: ->{ name }
