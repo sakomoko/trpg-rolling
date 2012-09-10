@@ -35,5 +35,15 @@ FactoryGirl.define do
     vitality_equipment 0
     intelligence_equipment 0
     mind_equipment 0
+
+    factory :sword_world_rpg2_with_skills do
+      ignore do
+        skills_count 5
+      end
+
+      after(:create) do |character, evaluator|
+        FactoryGirl.create_list(:sword_world_rpg2_acquired_skill, evaluator.skills_count, character: character)
+      end
+    end
   end
 end

@@ -88,4 +88,21 @@ describe SwordWorldRpg2 do
       its("#{status}_bonus") { should eq ( (character.send(status) / 6).truncate ) }
     end
   end
+
+  describe "level" do
+    let(:character) { FactoryGirl.create :sword_world_rpg2_with_skills }
+    subject { character.level }
+
+    context "level 3" do
+      it { should eq 3 }
+    end
+
+    context "level 5" do
+      before do
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, :level => 5)
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, :level => 4)
+      end
+      it { should eq 5 }
+    end
+  end
 end

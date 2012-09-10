@@ -66,4 +66,8 @@ class SwordWorldRpg2 < Character
     end
   end
 
+  def level
+    acquired_skills.max(:level)
+  end
+
 end
