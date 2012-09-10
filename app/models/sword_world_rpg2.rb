@@ -3,7 +3,7 @@ class SwordWorldRpg2 < Character
   embeds_many :acquired_skills, class_name: "SwordWorldRpg2::AcquiredSkill"
   embeds_many :abilities, class_name: "SwordWorldRpg2::Ability"
   embeds_many :function_skills, class_name: "SwordWorldRpg2::FunctionSkill"
-  accepts_nested_attributes_for :acquired_skills, :abilities, :function_skills, :allow_destroy => true
+  accepts_nested_attributes_for :acquired_skills, :abilities, :function_skills, :combat_skills, :allow_destroy => true
 
   STATUS = { dexterity: [:technique, :a], agility: [:technique, :b], strength: [:physique, :c], vitality: [:physique, :d], intelligence: [:heart, :e], mind: [:heart, :f] }
 
@@ -34,6 +34,10 @@ class SwordWorldRpg2 < Character
   field :profile, type: String
   field :memo, type: String
 
+  field :language, type: String
+  field :language_read_only, type: String
+  field :language_speech_only, type: String
+
   ("a".."f").each do |status|
     field "sub_#{status}".to_sym, type: Integer, default: 0
   end
@@ -50,7 +54,8 @@ class SwordWorldRpg2 < Character
   attr_accessible :grow_dexterity, :grow_agility, :grow_strength, :grow_vitality, :grow_intelligence, :grow_mind
   attr_accessible :dexterity_equipment, :agility_equipment, :strength_equipment, :vitality_equipment, :intelligence_equipment, :mind_equipment
   attr_accessible :equipments, :items, :honor_items, :profile, :memo
-  attr_accessible :acquired_skills_attributes, :abilities_attributes, :function_skills_attributes
+  attr_accessible :language, :language_read_only, :language_speech_only
+  attr_accessible :acquired_skills_attributes, :abilities_attributes, :function_skills_attributes, :combat_skills_attributes
   attr_accessible :combat_skill_ids
   attr_accessible *accessible_attributes, as: :admin
 

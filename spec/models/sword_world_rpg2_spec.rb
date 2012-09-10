@@ -30,6 +30,10 @@ describe SwordWorldRpg2 do
     it { should be_accessible :profile }
     it { should be_accessible :memo }
 
+    it { should be_accessible :language }
+    it { should be_accessible :language_read_only }
+    it { should be_accessible :language_speech_only }
+
     it { should be_accessible :acquired_skills_attributes }
     it { should be_accessible :abilities_attributes }
     it { should be_accessible :function_skills_attributes }
@@ -50,6 +54,7 @@ describe SwordWorldRpg2 do
     it { should have_fields(:dexterity_equipment, :agility_equipment, :vitality_equipment, :strength_equipment, :intelligence_equipment, :mind_equipment).of_type(Integer).with_default_value_of(0) }
     it { should have_fields(:equipments, :items, :honor_items).of_type(String) }
     it { should have_fields(:profile, :memo).of_type(String) }
+    it { should have_fields(:language,:language_read_only, :language_speech_only).of_type(String) }
   end
 
   describe "status" do
