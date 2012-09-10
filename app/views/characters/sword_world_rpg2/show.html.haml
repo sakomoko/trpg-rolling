@@ -1,0 +1,273 @@
+#sword-world-rpg2-show
+  .page-header
+    %h1
+      = @character.name
+      %small SwordWorldRPG2.0
+
+  .row
+    .span5
+      #params
+        .row
+          #technique.well.span1
+            %span 技
+            %span= @character.technique
+          .span1
+            .head
+              %span A
+            .well
+              %span= @character.sub_a
+            .head
+              %span B
+            .well
+              %span= @character.sub_b
+          .span1
+            .well
+              %span= @character.grow_dexterity
+            .well
+              %span= @character.grow_agility
+          .span1
+            .well
+              %span= @character.dexterity_equipment
+            .well
+              %span= @character.agility_equipment
+          .span1
+            .head
+              %span 器用度
+            .well.total
+              %span =
+              %strong= @character.dexterity
+            .head
+              %span 敏捷度
+            .well.total
+              %span =
+              %strong= @character.agility
+          .span1
+            .well
+              %span +
+              %strong= @character.dexterity_bonus
+            .well
+              %span +
+              %strong= @character.agility_bonus
+
+        .row
+          #physique.well.span1
+            %span 体
+            %span= @character.physique
+          .span1
+            .head
+              %span C
+            .well
+              %span= @character.sub_c
+            .head
+              %span D
+            .well
+              %span= @character.sub_d
+          .span1
+            .well
+              %span= @character.grow_strength
+            .well
+              %span= @character.grow_vitality
+          .span1
+            .well
+              %span= @character.strength_equipment
+            .well
+              %span= @character.vitality_equipment
+          .span1
+            .head
+              %span 筋力
+            .well.total
+              %span =
+              %strong= @character.strength
+            .head
+              %span 生命力
+            .well.total
+              %span =
+              %strong= @character.vitality
+          .span1
+            .well
+              %span +
+              %strong= @character.strength_bonus
+            .well
+              %span +
+              %strong= @character.vitality_bonus
+
+        .row
+          #heart.well.span1
+            %span 心
+            %span= @character.heart
+          .span1
+            .head
+              %span E
+            .well
+              %span= @character.sub_e
+            .head
+              %span F
+            .well
+              %span= @character.sub_f
+          .span1
+            .well
+              %span= @character.grow_intelligence
+            .well
+              %span= @character.grow_mind
+          .span1
+            .well
+              %span= @character.intelligence_equipment
+            .well
+              %span= @character.mind_equipment
+          .span1
+            .head
+              %span 知力
+            .well.total
+              %span =
+              %strong= @character.intelligence
+            .head
+              %span 精神力
+            .well.total
+              %span =
+              %strong= @character.mind
+          .span1
+            .well
+              %span +
+              %strong= @character.intelligence_bonus
+            .well
+              %span +
+              %strong= @character.mind_bonus
+
+    .span7
+      #personal.well
+        %dl.dl-horizontal
+          %dt プレイヤー
+          %dd
+            %i.icon-user
+            = link_to @character.user.name, @character.user
+          %dt 種族
+          %dd= @character.race
+
+          %dt 性別
+          %dd= @character.gender
+
+          %dt 年齢
+          %dd= @character.age
+
+          %dt 生まれ
+          %dd= @character.birth
+
+          %dt 穢れ
+          %dd
+            %span.badge.badge-important
+              = @character.pollution
+
+          %dt 総経験点
+          %dd= @character.total_experience
+
+          %dt 経験点
+          %dd= @character.experience
+
+          %dt 総名誉点
+          %dd= @character.total_honor
+
+          %dt 名誉点
+          %dd= @character.honor
+
+          %dt 種族特徴
+          %dd= @character.race_bonus
+
+        %dl.dl-horizontal.battle
+          %dt 冒険者レベル
+          %dd
+            %span.badge.badge-inverse
+              = @character.level
+
+          %dt HP
+          %dd
+            %span.badge.badge-info
+              = @character.hp
+
+          %dt MP
+          %dd
+            %span.badge.badge-success
+              = @character.mp
+
+  .row
+    .span4
+      %table.table.table-bordered.table-striped
+        %caption 冒険者技能
+        %thead
+          %tr
+            %th Name
+            %th Level
+        %tbody
+          - @character.acquired_skills.each do |acquired_skill|
+            %tr
+              %td= acquired_skill.skill.name
+              %td= acquired_skill.level
+    .span4
+      %table.table.table-bordered.table-striped
+        %caption 一般技能
+        %thead
+          %tr
+            %th Name
+            %th Level
+        %tbody
+          - @character.function_skills.each do |skill|
+            %tr
+              %td= skill.name
+              %td= skill.level
+
+    .span4
+      %dl
+        %dt 会話・読解
+        %dd= @character.language
+        %dt 会話のみ
+        %dd= @character.language_speech_only
+        %dt 読解のみ
+        %dd= @character.language_read_only
+
+  .row
+    .span6
+      %table.table.table-bordered.table-striped
+        %caption 戦闘特技
+        %thead
+          %tr
+            %th Name
+            %th Description
+        %tbody
+          - @character.combat_skills.each do |skill|
+            %tr
+              %td= skill.name
+              %td= skill.description
+    .span6
+      %table.table.table-bordered.table-striped
+        %caption 練技・呪歌など
+        %thead
+          %tr
+            %th Name
+            %th Description
+        %tbody
+          - @character.abilities.each do |ability|
+            %tr
+              %td= ability.name
+              %td= ability.description
+
+    
+  #honor_items.row
+    %h3 名誉アイテム
+    .well
+      = markdown @character.honor_items
+  .row
+    #equipments.span6
+      %h3 装備品
+      .well
+        = markdown @character.equipments
+    #items.span6
+      %h3 所持品
+      .well
+        = markdown @character.items
+  #profile.row
+    %h3 プロフィール
+    .well
+      = markdown @character.profile
+  #memo.row
+    %h3 メモ
+    .well
+      = markdown @character.memo

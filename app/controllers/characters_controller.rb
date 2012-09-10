@@ -7,6 +7,13 @@ class CharactersController < ApplicationController
     respond_with @world, @characters
   end
 
+  def show
+    @world = World.find params[:world_id]
+    @system_key = @world.game_system.system_key.underscore
+    @character = Character.find params[:id]
+    respond_with @world, @character
+  end
+
   def new
     @world = World.find params[:world_id]
     model_name  = @world.game_system.system_key

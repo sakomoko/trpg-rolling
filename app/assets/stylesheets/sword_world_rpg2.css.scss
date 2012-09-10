@@ -30,3 +30,41 @@
 		}
 	}
 }
+
+#sword-world-rpg2-show {
+	#params {
+		margin-left: 15px;
+		position: relative;
+		text-align: center;
+		.row {
+			.span1:first-of-type {
+				height: 80px;
+				span {
+					position:relative;
+					top: 30%;
+				}
+			}
+		}
+		.span1 {
+			width: 50px;
+			margin-left: 20px;
+
+			.well.total {
+				span {
+					position: absolute;
+					margin-left: -31px;
+				}
+			}
+		}
+		.well {
+			padding: 10px;
+		}
+		.head {
+			width: 50px;
+			font-weight: bold;
+			font-size: 13px;
+			position: absolute;
+			margin-top: -10px;
+		}
+	}
+}

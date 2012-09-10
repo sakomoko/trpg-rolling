@@ -18,6 +18,17 @@ describe CharactersController do
     it { assigns(:system_key).should eq game_system.system_key.underscore }
   end
 
+  describe "GET show" do
+    subject { assigns :character }
+    before do
+      get :show, id: character.to_param,  world_id: world.to_param
+    end
+    it { should eq character }
+    it { assigns(:world).should eq character.world }
+    it { assigns(:system_key).should eq game_system.system_key.underscore }
+    it { response.should render_template("show") }
+  end
+
   describe "GET new" do
     subject { assigns :character }
     before do
