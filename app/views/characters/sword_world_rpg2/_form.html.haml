@@ -3,9 +3,9 @@
     - if f.error_notification
       = f.error_notification
 
-    = f.input :name
-    = f.input :gender, :collection => [:male, :female], as: :radio_buttons
-    = f.input :age, as: :integer, :input_html => {class: "span1"}
+    = f.input :name, :label => "名前"
+    = f.input :gender, :collection => [:male, :female], as: :radio_buttons, label: "性別"
+    = f.input :age, as: :integer, :input_html => {class: "span1"}, label: "年齢"
 
     = f.input :race, :label => "種族"
     = f.input :race_bonus, :label => "種族特性"
@@ -144,7 +144,7 @@
     #combat-skills
       %h3 戦闘特技
       - @combat_skills = SwordWorldRpg2::CombatSkill.all.cache
-      = f.input :combat_skills, as: :select, collection: @combat_skills, :input_html => { :multiple => true, "data-placeholder" => "戦闘特技を検索" ,class: "chzn-select" }
+      = f.input :combat_skills, as: :select, collection: @combat_skills, :input_html => { :multiple => true, "data-placeholder" => "戦闘特技を検索" ,class: "chzn-select" }, label: false
     %hr
 
     #abilities
