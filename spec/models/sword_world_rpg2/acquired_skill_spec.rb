@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SwordWorldRpg2::AcquiredSkill do
   describe "associations" do
-    it { should be_embedded_in(:sword_world_rpg2).as_inverse_of(:acquired_skills) }
+    it { should be_embedded_in(:character).of_type(SwordWorldRpg2).as_inverse_of(:acquired_skills) }
     it { should belong_to(:skill).of_type(SwordWorldRpg2::Skill).as_inverse_of(:acquired_skills) }
   end
 
