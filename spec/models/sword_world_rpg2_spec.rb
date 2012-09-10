@@ -80,4 +80,12 @@ describe SwordWorldRpg2 do
       its(:mind) { should be_eql (character.heart + character.sub_f + character.grow_mind + character.mind_equipment) }
     end
   end
+
+  describe "bonus" do
+    let(:character) { FactoryGirl.create :sword_world_rpg2 }
+    subject { character }
+    [:dexterity, :agility, :strength, :vitality, :intelligence, :mind].each do |status|
+      its("#{status}_bonus") { should eq ( (character.send(status) / 6).truncate ) }
+    end
+  end
 end

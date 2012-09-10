@@ -55,9 +55,15 @@ class SwordWorldRpg2 < Character
   attr_accessible *accessible_attributes, as: :admin
 
   def method_missing(method, *args)
-    super unless STATUS.include? method
-    status = STATUS[method]
-    send("sub_#{status[1]}") + send(status[0]) + send("#{method}_equipment") + send("grow_#{method}")
+    if method.to_s.include? "bonus"
+      status, * = method.to_s.split("_")
+      super unless status.to_sym.in? STATUS.keys
+      (send(status) / 6).truncate
+    else
+      super unless STATUS.include? method
+      status = STATUS[method]
+      send("sub_#{status[1]}") + send(status[0]) + send("#{method}_equipment") + send("grow_#{method}")
+    end
   end
 
 end
