@@ -105,4 +105,29 @@ describe SwordWorldRpg2 do
       it { should eq 5 }
     end
   end
+
+  describe "hp" do
+    let(:character) { FactoryGirl.create :sword_world_rpg2_with_skills }
+    subject { character.hp }
+
+    context "level 3" do
+      it { should eq (3 * 3 + character.hp_bonus + character.vitality) }
+    end
+
+    context "level 5" do
+      before do
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, :level => 5)
+      end
+      it { should eq (5 * 3 + character.hp_bonus + character.vitality) }
+    end
+
+    context "level 5 with bonus 15" do
+      before do
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, :level => 5)
+        character.hp_bonus = 15
+      end
+      it { should eq (5 * 3 + 15 + character.vitality) }
+    end
+
+  end
 end

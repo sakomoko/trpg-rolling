@@ -70,4 +70,7 @@ class SwordWorldRpg2 < Character
     acquired_skills.max(:level)
   end
 
+  def hp
+    3 * level + vitality + hp_bonus
+  end
 end
