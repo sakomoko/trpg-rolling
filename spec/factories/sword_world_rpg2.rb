@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :sword_world_rpg2 do
     name "Test"
+    age 18
     race "Human"
     birth "Mercenary"
     pollution 0
@@ -35,6 +36,10 @@ FactoryGirl.define do
     vitality_equipment 0
     intelligence_equipment 0
     mind_equipment 0
+
+    user
+    game_system
+    world
 
     factory :sword_world_rpg2_with_skills do
       ignore do
