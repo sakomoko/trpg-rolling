@@ -128,6 +128,30 @@ describe SwordWorldRpg2 do
       end
       it { should eq (5 * 3 + 15 + character.vitality) }
     end
+  end
 
+  describe "mp" do
+    let(:character) { FactoryGirl.create :sword_world_rpg2_with_skills }
+    let(:mp_skill) { FactoryGirl.create :sword_world_rpg2_skill, has_mp: true }
+    subject { character.mp }
+
+    context "not have mp" do
+      it { should eq character.mind }
+    end
+
+    context "level 3 magician" do
+      before do
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, skill: mp_skill)
+      end
+      it { should eq (character.mind + 3 * 3) }
+    end
+
+    context "level 3 magican and level 2 priest" do
+      before do
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, skill: mp_skill)
+        character.acquired_skills << FactoryGirl.build(:sword_world_rpg2_acquired_skill, skill: mp_skill, level: 2)
+      end
+      it { should eq (character.mind + 5 * 3) }
+    end
   end
 end

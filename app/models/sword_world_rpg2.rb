@@ -73,4 +73,10 @@ class SwordWorldRpg2 < Character
   def hp
     3 * level + vitality + hp_bonus
   end
+
+  def mp
+    acquired_skills.reduce(mind + mp_bonus) do |sum, acquired_skill|
+      sum + (acquired_skill.skill.has_mp? ? acquired_skill.level * 3 : 0)
+    end
+  end
 end
