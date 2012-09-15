@@ -7,7 +7,7 @@
   - @characters.each do |character|
     %tr
       %td= link_to character.name, world_character_url(character.world, character.id)
-      %td hoge
+      %td= character.level
       %td
         %i.icon-user
         = link_to character.user.name, character.user

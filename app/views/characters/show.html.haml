@@ -1,4 +1,8 @@
-= render :file => "characters/#{@system_key}/show"
+- if can? :update, @character
+  .pull-right
+    = link_to "Edit", [:edit, @world, @character], class: "btn"
 
+
+= render :file => "characters/#{@system_key}/show"
 .form-actions
   = link_to "Back", world_characters_path, class: "btn"

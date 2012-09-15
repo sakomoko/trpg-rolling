@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe Character do
 
@@ -47,5 +48,39 @@ describe Character do
       it { should allow_mass_assignment_of(:created_at).as(:admin) }
       it { should allow_mass_assignment_of(:updated_at).as(:admin) }
     end
+  end
+
+  describe "abilities" do
+    subject { ability }
+    let(:ability) { Ability.new(user) }
+    let(:user) { FactoryGirl.create :user }
+    named_let(:character) { FactoryGirl.create :character }
+    named_let(:new_character) { Character.new }
+
+    context "When access all guest user" do
+      let(:user) { FactoryGirl.build :user }
+      it { should be_able_to(:read, character) }
+      it { should_not be_able_to(:create, new_character) }
+      it { should_not be_able_to(:update, character) }
+      it { should_not be_able_to(:destroy, character) }
+    end
+
+    context "When user own character" do
+      named_let(:character) { FactoryGirl.create :character, user: user }
+      it { should be_able_to(:manage, character) }
+    end
+
+    context "When access other users character" do
+      it { should be_able_to(:read, character) }
+      it { should_not be_able_to(:update, character) }
+      it { should_not be_able_to(:destroy, character) }
+    end
+
+    context "Whenn access World Owner" do
+      let(:world) { FactoryGirl.create :world, owner: user }
+      named_let(:character) { FactoryGirl.create :character, world: world}
+      it { should be_able_to(:manage, character) }
+    end
+
   end
 end
