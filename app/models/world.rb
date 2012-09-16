@@ -14,7 +14,7 @@ class World
   field :public, :type => Boolean, :default => true
   field :latest_session_at, :type => DateTime
 
-  validates_presence_of :name, :owner_id, :game_system_id
+  validates_presence_of :name, :description, :public, :owner_id, :game_system_id
 
   attr_accessible :name, :description, :public, :game_system_id
   attr_accessible *accessible_attributes, :owner_id, :latest_session_at, :created_at, :updated_at, :deleted_at, as: :admin

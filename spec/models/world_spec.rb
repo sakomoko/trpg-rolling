@@ -3,6 +3,30 @@ require "cancan/matchers"
 
 describe World do
 
+  describe "associations" do
+    it { should belong_to(:owner).of_type(User) }
+    it { should belong_to(:game_system) }
+    it { should have_many(:rooms).as_inverse_of(:roomable) }
+    it { should have_many(:sessions) }
+    it { should have_many(:characters) }
+  end
+
+  describe "fields" do
+    it { should have_fields(:name, :description).of_type(String) }
+    it { should have_field(:public).of_type(Boolean).with_default_value_of(true) }
+    it { should have_field(:latest_session_at).of_type(DateTime) }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of :name }
+    it { should validate_presence_of :description }
+    it { should validate_presence_of :public }
+
+    it { should validate_presence_of :owner_id }
+    it { should validate_presence_of :game_system_id }
+  end
+
+
   describe "attr_accesible" do
     it { should be_accessible :name }
     it { should be_accessible :description }
