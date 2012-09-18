@@ -24,6 +24,10 @@ class World
 
   alias :title :name
 
+  after_create do |world|
+    world.join world.owner
+  end
+
   def user_joined?(user)
     members.approved.where(user: user).exists?
   end
@@ -45,8 +49,11 @@ class World
       if user_awaiting? user
         member = members.where(user: user).first
         member.update_attributes({status: :approved}, as: :admin)
+        member
       else
-        members << Member.new({user: user, status: :approved}, as: :admin)
+        member = Member.new({user: user, status: :approved}, as: :admin)
+        members << member
+        member
       end
     end
   end

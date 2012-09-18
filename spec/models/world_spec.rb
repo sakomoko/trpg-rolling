@@ -58,8 +58,6 @@ describe World do
     it { should_not be_admin_accessible :id }
   end
 
-
-
   describe "ability" do
     subject { ability }
     let(:ability) { Ability.new(user) }
@@ -95,6 +93,15 @@ describe World do
       it { should_not be_able_to(:update, world)}
       it { should_not be_able_to(:destroy, world)}
     end
+  end
+
+  describe "after_create" do
+    subject { world.members }
+    let(:world) { FactoryGirl.create :world, owner: user }
+    named_let(:user) { FactoryGirl.create :user }
+    it { should have(1).items }
+    its("first.status") { should eq :approved }
+    its("first.user") { should eq user }
   end
 
   describe "user_joind?" do
@@ -140,47 +147,41 @@ describe World do
   end
 
   describe "register" do
-    subject { world }
+    subject { world.register user }
     let(:world) { FactoryGirl.create :world }
     named_let(:user) { FactoryGirl.create :user }
 
     context "When user not joined" do
-      before do
-        @result = world.register user
-      end
-      its("members.first.user") { should eq user}
-      its("members.first.status") { should eq :awaiting}
-      it { @result.class.should eq Member }
+      its(:user) { should eq user}
+      its(:status) { should eq :awaiting}
+      its(:class) { should eq Member }
     end
 
     context "When user awaiting" do
+      subject { world }
       before do
         2.times {world.register user}
       end
-      its("members.count") { should eq 1 }
+      its(:members) { should have(2).items }
     end
   end
 
   describe "join" do
-    subject { world }
+    subject { world.join user }
     let(:world) { FactoryGirl.create :world }
     named_let(:user) { FactoryGirl.create :user }
 
     context "When user not joined" do
-      before do
-        world.join user
-      end
-      its("members.first.user") { should eq user}
+      its(:user) { should eq user}
     end
 
     context "When user awaiting" do
       before do
         world.register user
-        world.join user
       end
-      its("members.count") { should eq 1 }
-      its("members.first.status") { should eq :approved }
-      its("members.first.user") { should eq user }
+      it { world.members.should have(2).items }
+      its(:status) { should eq :approved }
+      its(:user) { should eq user }
     end
   end
 
