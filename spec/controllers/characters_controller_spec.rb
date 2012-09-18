@@ -34,6 +34,7 @@ describe CharactersController do
     subject { assigns :character }
     before do
       sign_in user
+      world.join user
       get :new, world_id: world.to_param
     end
     it { should be_new_record }

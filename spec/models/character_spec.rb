@@ -56,6 +56,7 @@ describe Character do
     let(:user) { FactoryGirl.create :user }
     named_let(:character) { FactoryGirl.create :character }
     named_let(:new_character) { Character.new }
+    let(:world) { FactoryGirl.create :world }
 
     context "When access all guest user" do
       let(:user) { FactoryGirl.build :user }
@@ -80,6 +81,18 @@ describe Character do
       let(:world) { FactoryGirl.create :world, owner: user }
       named_let(:character) { FactoryGirl.create :character, world: world}
       it { should be_able_to(:manage, character) }
+    end
+
+    context "When user not joined to members" do
+      it { should_not be_able_to(:create, new_character) }
+    end
+
+    context "When user alredy joined to members" do
+      before do
+        world.join user
+        new_character.world = world
+      end
+      it { should be_able_to(:create, new_character) }
     end
 
   end

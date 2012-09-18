@@ -20,7 +20,9 @@ class CharactersController < ApplicationController
     model_name  = @world.game_system.system_key
     @system_key = model_name.underscore
     model = self.class.const_get model_name
-    @character = model.new
+    @character = model.new do |m|
+      m.world = @world
+    end
     authorize! :new, @character
     respond_with @world, @character
   end
@@ -35,12 +37,13 @@ class CharactersController < ApplicationController
     model_name = @world.game_system.system_key
     @system_key = model_name.underscore
     model = self.class.const_get model_name
-    @character = model.create params[@system_key] do |m|
+    @character = model.new params[@system_key] do |m|
       m.user = current_user
       m.world = @world
       m.game_system = @world.game_system
     end
     authorize! :create, @character
+    @character.save!
     respond_with @world, @character
   end
 

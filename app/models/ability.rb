@@ -33,7 +33,9 @@ class Ability
       end
 
       #for Character Ability
-      can :create, Character
+      can :create, Character do |character|
+        character.world.try(:user_joined?, user)
+      end
       can :manage, Character, :user_id => user.id
       can :manage, Character do |character|
         character.world.try(:owner) == user

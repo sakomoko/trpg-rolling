@@ -24,7 +24,7 @@
     = link_to "Create Session", new_world_session_path(@world), class: "btn btn-success"
   - if can? :create, @world.rooms.build
     = link_to "Create Static Room", new_world_room_path(@world, :static => 1), class: "btn btn-primary"
-    = link_to "View Character List", world_characters_path(@world), class: "btn"
+  = link_to "View Character List", world_characters_path(@world), class: "btn"
   = link_to "View Session List", world_sessions_path(@world), class: "btn"
   = link_to "View Finished Session List", finished_world_sessions_path(@world), class: "btn"
   = link_to t("general.world.member_list"), world_members_path(@world), class: "btn"
