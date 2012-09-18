@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_filter :authenticate_user!, :only => [:awaiting, :new, :create, :apply, :destroy]
   load_and_authorize_resource :world
 
   def index
