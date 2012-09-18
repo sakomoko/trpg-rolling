@@ -93,6 +93,7 @@ describe SessionsController do
     context "When a user logged in" do
       before do
         sign_in user
+        session.world.join user
       end
       context "with valid params" do
         before do

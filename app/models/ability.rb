@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     alias_action :update, :to => :close
+    alias_action :finished, :to => :read
 
     user ||= User.new
 
@@ -26,7 +27,9 @@ class Ability
       end
 
       #for Session Ability
-      can :create, Session
+      can :create, Session do |session|
+        session.world.try(:user_joined?, user)
+      end
       can :manage, Session, :game_master_id => user.id
       can :manage, Session do |session|
         session.world.try(:owner) == user

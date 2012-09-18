@@ -46,6 +46,7 @@ describe Session do
     subject { ability }
     let(:ability) { Ability.new(user) }
     let(:user) { FactoryGirl.create :user }
+    let(:world) { FactoryGirl.create :world }
     named_let(:session) { FactoryGirl.create :session }
     named_let(:new_session) { Session.new }
 
@@ -71,11 +72,25 @@ describe Session do
     end
 
     context "When access logged in user" do
-      it { should be_able_to(:create, new_session) }
       it { should be_able_to(:read, session) }
       it { should_not be_able_to(:manage, session)}
       it { should_not be_able_to(:update, session)}
       it { should_not be_able_to(:destroy, session)}
+
+      context "When user alredy joined" do
+        before do
+          world.join user
+          new_session.world = world
+        end
+        it { should be_able_to(:create, new_session) }
+      end
+
+      context "When user not joined" do
+        before do
+          new_session.world = world
+        end
+        it { should_not be_able_to(:create, new_session) }
+      end
     end
 
     context "When access Session World Owner" do
