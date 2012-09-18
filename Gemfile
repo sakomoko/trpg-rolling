@@ -58,4 +58,5 @@ group :development, :test do
   gem 'factory_girl_rails', :require => false
   gem 'capybara'
   gem 'named_let'
+  gem 'i18n_generators'
 end
