@@ -44,6 +44,7 @@ platforms :mri_19 do
 end
 
 group :development, :test do
+  gem 'thin'
   gem 'guard'
   gem 'guard-rspec'
   gem 'rb-fsevent'
