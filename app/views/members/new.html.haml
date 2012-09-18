@@ -1,0 +1,6 @@
+.hero-unit
+  %h1= "Join to #{@world.title}?"
+  %p= t "general.confirm.join"
+  %p
+    = link_to t("general.buttons.join"), world_members_path, method: :post, class: "btn btn-primary btn-large"
+    = link_to t("general.buttons.cancel"), @world, class: "btn btn-large"

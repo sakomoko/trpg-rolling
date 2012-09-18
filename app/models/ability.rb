@@ -8,7 +8,7 @@ class Ability
 
     can :manage, :all if user.admin?
 
-    can :read, [World, GameSystem, User, Room, Session, Character]
+    can :read, [World, GameSystem, User, Room, Session, Character, Member]
 
     if user.persisted?
 
@@ -37,6 +37,12 @@ class Ability
       can :manage, Character, :user_id => user.id
       can :manage, Character do |character|
         character.world.try(:owner) == user
+      end
+
+      #for Member Ability
+      can :create, Member
+      can :manage, Member do |member|
+        member.world.try(:owner) == user
       end
 
     end

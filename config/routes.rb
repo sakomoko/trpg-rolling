@@ -1,11 +1,14 @@
 TrpgRolling::Application.routes.draw do
 
-  
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
 
   resources :worlds do
+    resources :members do
+      get :awaiting, :on => :collection
+      put :apply, :on => :member
+    end
     resources :sessions do
       get :finished, :on => :collection
     end

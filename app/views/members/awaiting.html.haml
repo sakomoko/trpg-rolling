@@ -1,0 +1,17 @@
+%h1= t "general.headers.awaiting_members"
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th CreatedAt
+    %th Action
+
+  - @members.each do |member|
+    %tr
+      %td= link_to member.user.name, [@world, member]
+      %td= member.created_at
+      %td= link_to t("general.buttons.apply"), [:apply, @world, member], method: :put, class: "btn btn-primary"
+      %td= link_to t("general.buttons.reject"), [:destroy, @world, member], method: :delete, class: "btn btn-danger"
+
+.form-actions
+  = link_to "Back", @world, class: "btn"

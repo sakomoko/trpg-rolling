@@ -2,6 +2,8 @@
 .hero-unit
   %h2= @world.name
   %p= link_to @world.game_system.name, @world.game_system
+  - if user_signed_in? &&  @world.can_user_register?(current_user)
+    %p= link_to t("general.buttons.join"), new_world_member_path(@world), class: "btn btn-primary btn-large"
 
 %dl
   %dt Owner
@@ -25,6 +27,7 @@
     = link_to "View Character List", world_characters_path(@world), class: "btn"
   = link_to "View Session List", world_sessions_path(@world), class: "btn"
   = link_to "View Finished Session List", finished_world_sessions_path(@world), class: "btn"
+  = link_to t("general.world.member_list"), world_members_path(@world), class: "btn"
 
 %h3 Listing Rooms
 

@@ -9,6 +9,7 @@ describe World do
     it { should have_many(:rooms).as_inverse_of(:roomable) }
     it { should have_many(:sessions) }
     it { should have_many(:characters) }
+    it { should embed_many(:members) }
   end
 
   describe "fields" do
@@ -94,6 +95,118 @@ describe World do
       it { should_not be_able_to(:update, world)}
       it { should_not be_able_to(:destroy, world)}
     end
+  end
+
+  describe "user_joind?" do
+    subject { world }
+    let(:world) { FactoryGirl.create :world }
+    named_let(:user) { FactoryGirl.create :user }
+    context "user joined world" do
+      before do 
+        world.members << Member.new({user: user}, as: :admin)
+      end
+      it { should be_user_joined user }
+    end
+    context "user awaiting" do
+      before do 
+        world.members << Member.new({status: :awaiting, user: user}, as: :admin)
+      end
+      it { should_not be_user_joined user }
+    end
+    context "user not joined world" do
+      it { should_not be_user_joined user }
+    end
+  end
+
+  describe "user_awaiting?" do
+    subject { world }
+    let(:world) { FactoryGirl.create :world }
+    named_let(:user) { FactoryGirl.create :user }
+    context "user joined world" do
+      before do 
+        world.members << Member.new({user: user}, as: :admin)
+      end
+      it { should_not be_user_awaiting user }
+    end
+    context "user awaiting" do
+      before do 
+        world.members << Member.new({status: :awaiting, user: user}, as: :admin)
+      end
+      it { should be_user_awaiting user }
+    end
+    context "user not joined world" do
+      it { should_not be_user_awaiting user }
+    end
+  end
+
+  describe "register" do
+    subject { world }
+    let(:world) { FactoryGirl.create :world }
+    named_let(:user) { FactoryGirl.create :user }
+
+    context "When user not joined" do
+      before do
+        @result = world.register user
+      end
+      its("members.first.user") { should eq user}
+      its("members.first.status") { should eq :awaiting}
+      it { @result.class.should eq Member }
+    end
+
+    context "When user awaiting" do
+      before do
+        2.times {world.register user}
+      end
+      its("members.count") { should eq 1 }
+    end
+  end
+
+  describe "join" do
+    subject { world }
+    let(:world) { FactoryGirl.create :world }
+    named_let(:user) { FactoryGirl.create :user }
+
+    context "When user not joined" do
+      before do
+        world.join user
+      end
+      its("members.first.user") { should eq user}
+    end
+
+    context "When user awaiting" do
+      before do
+        world.register user
+        world.join user
+      end
+      its("members.count") { should eq 1 }
+      its("members.first.status") { should eq :approved }
+      its("members.first.user") { should eq user }
+    end
+  end
+
+  describe "can_user_register?" do
+    subject { world.can_user_register? user }
+    let(:world) { FactoryGirl.create :world }
+    named_let(:user) { FactoryGirl.create :user }
+
+    context "When user are already awaiting" do
+      before do
+        world.register user
+      end
+      it { should be_false }
+    end
+
+    context "When user are already joined" do
+      before do
+        world.join user
+      end
+      it { should be_false }
+    end
+
+    context "When user not register" do
+      it { should be_true }
+    end
+
   end
 
 end

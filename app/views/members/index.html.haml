@@ -1,0 +1,16 @@
+%h1 Listing Members
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Latest Participated Session
+    %th Latest Hosted Session
+
+  - @members.each do |member|
+    %tr
+      %td= link_to member.user.name, [@world, member]
+      %td Hoge
+      %td Hoge
+
+.form-actions
+  = link_to "Back", @world, class: "btn"
