@@ -249,25 +249,24 @@
               %td= ability.name
               %td= ability.description
 
-    
   #honor_items.row
     %h3 名誉アイテム
     .well
-      = markdown @character.honor_items
+      ~ markdown @character.honor_items
   .row
     #equipments.span6
       %h3 装備品
       .well
-        = markdown @character.equipments
+        ~ markdown @character.equipments
     #items.span6
       %h3 所持品
       .well
-        = markdown @character.items
+        ~ markdown @character.items
   #profile.row
     %h3 プロフィール
     .well
-      = markdown @character.profile
+      ~ markdown @character.profile
   #memo.row
     %h3 メモ
     .well
-      = markdown @character.memo
+      ~ markdown @character.memo
