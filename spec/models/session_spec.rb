@@ -8,6 +8,7 @@ describe Session do
     it { should belong_to(:game_master).of_type(User) }
     it { should have_many(:rooms).as_inverse_of(:roomable) }
     it { should embed_many(:comments) }
+    it { should embed_many(:applicants).of_type(Session::Applicant) }
   end
 
   describe "fields" do

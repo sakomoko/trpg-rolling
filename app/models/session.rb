@@ -7,6 +7,7 @@ class Session
   belongs_to :game_master, class_name: "User"
   has_many :rooms, as: :roomable, inverse_of: :roomable
   embeds_many :comments, as: :commentable, inverse_of: :commentable
+  embeds_many :applicants, class_name: "Session::Applicant"
 
   accepts_nested_attributes_for :comments, :allow_destroy => true
 
