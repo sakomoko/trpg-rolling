@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
   # GET /sessions/1.xml
   def show
     @comment = Comment.new
+    @applicant = @session.applicants.new
+    @session.reload
   end
 
   # GET /sessions/new

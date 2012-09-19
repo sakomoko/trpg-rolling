@@ -18,6 +18,7 @@ describe Session do
 
     it { should have_field(:public).of_type(Boolean).with_default_value_of(true) }
     it { should have_field(:finished).of_type(Boolean).with_default_value_of(false) }
+    it { should have_field(:fix_applicant).of_type(Boolean).with_default_value_of(false) }
 
     it { should have_field(:started_at).of_type(DateTime) }
     it { should have_field(:finished_at).of_type(DateTime) }
@@ -43,6 +44,7 @@ describe Session do
     it { should allow_mass_assignment_of :deadline }
     it { should allow_mass_assignment_of :guidelines }
     it { should allow_mass_assignment_of :public }
+    it { should allow_mass_assignment_of :fix_applicant }
 
     it { should_not allow_mass_assignment_of :id }
     it { should_not allow_mass_assignment_of :world_id }
@@ -71,6 +73,7 @@ describe Session do
     it { should allow_mass_assignment_of(:created_at).as(:admin) }
     it { should allow_mass_assignment_of(:updated_at).as(:admin) }
     it { should allow_mass_assignment_of(:deadline).as(:admin) }
+    it { should allow_mass_assignment_of(:fix_applicant).as(:admin) }
   end
 
 

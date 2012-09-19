@@ -35,6 +35,14 @@ class Ability
         session.world.try(:owner) == user
       end
 
+      #for Session::Applicant Ablity
+      can :create, Session::Applicant do |applicant|
+        applicant.session.try(:user_joined?, user) && !applicant.session.try(:fix_applicant?)
+      end
+      can :manage, Session::Applicant do |applicant|
+        applicant.session.try(:owner) == user
+      end
+
       #for Character Ability
       can :create, Character do |character|
         character.world.try(:user_joined?, user)

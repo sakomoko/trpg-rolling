@@ -3,6 +3,7 @@
   .pull-right
     = link_to "Create Session Room", new_session_room_path(@session), class: "btn btn-primary"
     = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
+    = link_to t('.edit-members'), edit_world_session_applicants_path(@world, @session), class: "btn"
 
 %h2= @session.title
 %p= @session.world.name
@@ -39,7 +40,19 @@
     ~ markdown @session.description
 
 .form-actions
+  - if !@session.fix_applicant? && can?(:create, @applicant)
+    = link_to t('buttons.entry-session'), new_world_session_applicant_path(@session.world, @session), role: "button", class: "btn btn-primary", "data-toggle" => "modal", "data-target" => "#entry-modal"
   = link_to 'Back', @session.world, class: "btn"
+
+
+%div(id="entry-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="entry-modal-label" aria-hidden="true" style="display: none;")
+  .modal-header
+    %button(type="button" class="close" data-dismiss="modal" aria-hidden="true")x
+    %h3#entry-modal-label Header
+  .modal-body
+  .modal-footer
+    %button(class="btn" data-dismiss="modal" aria-hidden="true")Close
+    %button(id="entry-button" class="btn btn-primary")Entry
 
 %h3 Listing Session Rooms
 
@@ -49,6 +62,16 @@
     %th Description
     %th CreatedAt
   = render @session.rooms
+
+- if @session.fix_applicant?
+  %h3= t'.entry-characters'
+  #characters
+    = render @session.applicants.approved
+
+- unless @session.fix_applicant?
+  %h3= t '.applicants'
+  #applicants
+    = render @session.applicants
 
 %h3 Session Comments
 #comments

@@ -8,6 +8,7 @@ describe Session::Applicant do
 
   describe "fields" do
     it { should have_field(:status).of_type(Symbol).with_default_value_of(:entry) }
+    it { should have_field(:comment).of_type(String) }
   end
 
   describe "validations" do
@@ -16,9 +17,11 @@ describe Session::Applicant do
   end
 
   describe "mass assignments" do
+    it { should allow_mass_assignment_of :comment }
     it { should_not allow_mass_assignment_of(:character_id) }
     it { should_not allow_mass_assignment_of(:status) }
 
+    it { should allow_mass_assignment_of(:comment).as(:admin) }
     it { should allow_mass_assignment_of(:status).as(:admin) }
     it { should allow_mass_assignment_of(:character_id).as(:admin) }
   end

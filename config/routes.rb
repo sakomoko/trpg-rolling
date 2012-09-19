@@ -11,6 +11,14 @@ TrpgRolling::Application.routes.draw do
     end
     resources :sessions do
       get :finished, :on => :collection
+
+      resources :applicants, controller: "session/applicants" do
+        get :edit, :on => :collection
+        put :select, :on => :member
+        put :remove, :on => :member
+        put :fix, :on => :collection
+      end
+
     end
     resources :rooms do
       put :close, :on => :member

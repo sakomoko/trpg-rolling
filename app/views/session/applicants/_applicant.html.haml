@@ -1,0 +1,16 @@
+%article.applicant
+  .avatar
+  %div
+    %div.applicant-meta
+      %p.character
+        %strong.character
+          = link_to applicant.character.name, [applicant.session.world, applicant.character]
+      %p.author
+        %i.icon-comment
+        %strong.author
+          = link_to applicant.character.user.name, [applicant.character.user]
+      %p.info
+        %i.icon-time
+        %em= applicant.created_at.to_s :db
+    %div.body.well
+      = applicant.comment

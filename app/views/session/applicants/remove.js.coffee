@@ -1,0 +1,1 @@
+$('#applicant-<%= @applicant.id %>').removeClass("success").find(".label").text("<%= @applicant.status %>").removeClass("label-info").end().find(".remove").hide().end().find(".select").show()

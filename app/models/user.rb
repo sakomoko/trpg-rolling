@@ -48,6 +48,7 @@ class User
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :rooms
+  has_many :characters
 
   before_save :reset_authentication_token
 

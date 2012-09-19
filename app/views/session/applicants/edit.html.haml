@@ -1,0 +1,34 @@
+%h2= t '.edit-applicants'
+
+%table.table
+  %tr
+    %th User
+    %th Character
+    %th Status
+    %th Comment
+    %th Action
+
+  - @applicants.each do |applicant|
+    - klass = ""
+    - klass = "success" if applicant.approved?
+    %tr(id = "applicant-#{applicant.id}" class="#{klass}")
+      %td= link_to applicant.character.user.name, applicant.character.user
+      %td= link_to applicant.character.name, [@world, applicant.character]
+      %td
+        - if applicant.approved?
+          %span.label.label-info
+            = applicant.status
+        - else
+          %span.label
+            = applicant.status
+      %td= applicant.comment
+      %td
+        - select, remove = ""
+        - if applicant.approved?
+          - select = "display: none;"
+        - else
+          - remove = "display: none;"
+        = link_to "Select", select_world_session_applicant_path(@world, @session, applicant), remote: true, method: :put, class: "select btn btn-info", style: select
+        = link_to "Remove", remove_world_session_applicant_path(@world, @session, applicant), remote: true, method: :put, class: "remove btn", style: remove
+
+= link_to t(".fix-members"), fix_world_session_applicants_path(@world, @session), method: :put, class: "btn btn-large btn-block btn-success"
