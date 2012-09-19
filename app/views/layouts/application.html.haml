@@ -24,6 +24,8 @@
     = render "navigation"
 
     .container
+      - if content_for? :header
+        = yield :header
       .row
         = yield :sidebar
         %div(class="#{content_for?(:sidebar) ? 'span9' : 'span12'}")

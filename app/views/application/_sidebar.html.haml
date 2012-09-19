@@ -1,0 +1,78 @@
+.span3#sidebar
+  .wrap(data-spy="affix" data-offset-bottom="50")
+    %ul#world-sidebar.dropdown.nav.nav-tabs.nav-stacked
+      %li
+        %a(href="#{world_path(@world)}")
+          %i.icon-home
+          World Top
+      %li.dropdown-submenu
+        %a(href="#{world_rooms_path(@world)}" class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#")
+          %i.icon-comment
+          Chat Rooms
+        %ul(class="dropdown-menu" role="menu" aria-labelledby="dLabel")
+          - @world.rooms.static.opened.each do |room|
+            %li
+              = link_to room.title, room
+      %li.dropdown-submenu
+        %a(href="#{world_sessions_path(@world)}" class="dropdown-toggle" id="dLabelSessions" role="button" data-toggle="dropdown" data-target="#")
+          %i.icon-file
+          Sessions
+          %span.badge.badge-info
+            = @world.sessions.playing.count
+        %ul(class="dropdown-menu" role="menu" aria-labelledby="dLabelSessions")
+          - @world.sessions.playing.each do |session|
+            %li
+              = link_to session.title, world_session_path(@world, session)
+      %li
+        %a(href="#{finished_world_sessions_path(@world)}")
+          %i.icon-book
+          Session Logs
+      %li
+        %a(href="#{world_characters_path(@world)}")
+          %i.icon-list-alt
+          Characters
+      %li
+        %a(href="#{world_members_path(@world)}")
+          %i.icon-user
+          Members
+
+    - if user_signed_in?
+      .sidebar-nav
+        .well
+          %ul.nav.nav-list
+            %li.nav-header
+              Main
+            %li
+              %i.icon.icon-home
+              Dashboard
+            - if can? :create, @world.sessions.build
+              %li
+                %a(href="#{new_world_session_path(@world)}")
+                  %i.icon.icon-edit
+                  Add New Session
+            %li
+              %i.icon.icon-folder-open
+              My Sessions
+              %ul
+                - @world.sessions.where(game_master: current_user).playing.each do |session|
+                  %li
+                    %a(href="#{world_session_path(@world, session)}")
+                      %i.icon.icon-file
+                      = session.title
+            %li
+              %i.icon.icon-tags
+              My Character
+              %ul
+                - @world.characters.where(user: current_user).each do |character|
+                  %li
+                    %a(href="#{world_character_path(@world, character)}")
+                      %i.icon.icon-tag
+                      = character.name
+
+
+            - if can? :create, @world.characters.build
+              %li
+                %a(href="#{new_world_character_path(@world)}")
+                  %i.icon.icon-plus
+                  Add New Character
+
