@@ -13,19 +13,20 @@ class Session
   field :title, :type => String
   field :description, :type => String
   field :guidelines, :type => String
-  field :published, :type => Boolean, :default => true
+  field :public, :type => Boolean, :default => true
 
   field :started_at, :type => DateTime
   field :finished_at, :type => DateTime
   field :finished, :type => Boolean, :default => false
   field :closed_at, :type => DateTime
+  field :deadline, :type => DateTime
 
-  validates_presence_of :title, :description, :game_master_id, :world_id
+  validates_presence_of :title, :description, :game_master_id, :world_id, :started_at, :finished_at
 
   scope :finished, where(:finished => true)
   scope :playing, where(:finished => false)
 
-  attr_accessible :title, :description, :started_at, :finished_at, :guidelines, :published
+  attr_accessible :title, :description, :started_at, :finished_at, :guidelines, :public, :deadline
   attr_accessible :comments_attributes
   attr_accessible *accessible_attributes, :world_id, :game_master_id, :finished, :closed_at, :created_at, :updated_at, as: :admin
 

@@ -3,42 +3,73 @@ require "cancan/matchers"
 
 describe Session do
 
+  describe "associations" do
+    it { should belong_to :world }
+    it { should belong_to(:game_master).of_type(User) }
+    it { should have_many(:rooms).as_inverse_of(:roomable) }
+    it { should embed_many(:comments) }
+  end
+
+  describe "fields" do
+    it { should have_field(:title).of_type(String) }
+    it { should have_field(:description).of_type(String) }
+    it { should have_field(:guidelines).of_type(String) }
+
+    it { should have_field(:public).of_type(Boolean).with_default_value_of(true) }
+    it { should have_field(:finished).of_type(Boolean).with_default_value_of(false) }
+
+    it { should have_field(:started_at).of_type(DateTime) }
+    it { should have_field(:finished_at).of_type(DateTime) }
+    it { should have_field(:closed_at).of_type(DateTime) }
+    it { should have_field(:deadline).of_type(DateTime) }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of :title }
+    it { should validate_presence_of :description }
+    it { should validate_presence_of :game_master_id }
+    it { should validate_presence_of :world_id }
+
+    it { should validate_presence_of :started_at }
+    it { should validate_presence_of :finished_at }
+  end
+
   describe "attr_accesible" do
-    it { should be_accessible :title }
-    it { should be_accessible :description }
-    it { should be_accessible :started_at }
-    it { should be_accessible :finished_at }
-    it { should be_accessible :guidelines }
-    it { should be_accessible :published }
+    it { should allow_mass_assignment_of :title }
+    it { should allow_mass_assignment_of :description }
+    it { should allow_mass_assignment_of :started_at }
+    it { should allow_mass_assignment_of :finished_at }
+    it { should allow_mass_assignment_of :deadline }
+    it { should allow_mass_assignment_of :guidelines }
+    it { should allow_mass_assignment_of :public }
 
-    it { should_not be_accessible :id }
-    it { should_not be_accessible :world_id }
-    it { should_not be_accessible :game_master_id }
+    it { should_not allow_mass_assignment_of :id }
+    it { should_not allow_mass_assignment_of :world_id }
+    it { should_not allow_mass_assignment_of :game_master_id }
 
-    it { should_not be_accessible :finished }
-    it { should_not be_accessible :closed_at }
+    it { should_not allow_mass_assignment_of :finished }
+    it { should_not allow_mass_assignment_of :closed_at }
 
-    it { should_not be_accessible :created_at }
-    it { should_not be_accessible :updated_at }
+    it { should_not allow_mass_assignment_of :created_at }
+    it { should_not allow_mass_assignment_of :updated_at }
   end
 
   describe "admin attr_accesible" do
-    it { should be_admin_accessible :title }
-    it { should be_admin_accessible :description }
-    it { should be_admin_accessible :started_at }
-    it { should be_admin_accessible :finished_at }
-    it { should be_admin_accessible :guidelines }
-    it { should be_admin_accessible :published }
+    it { should allow_mass_assignment_of(:title).as(:admin) }
+    it { should allow_mass_assignment_of(:description).as(:admin) }
+    it { should allow_mass_assignment_of(:started_at).as(:admin) }
+    it { should allow_mass_assignment_of(:finished_at).as(:admin) }
+    it { should allow_mass_assignment_of(:guidelines).as(:admin) }
+    it { should allow_mass_assignment_of(:public).as(:admin) }
 
-    it { should be_admin_accessible :world_id }
-    it { should be_admin_accessible :game_master_id }
+    it { should allow_mass_assignment_of(:world_id).as(:admin) }
+    it { should allow_mass_assignment_of(:game_master_id).as(:admin) }
 
-    it { should be_admin_accessible :finished }
-    it { should be_admin_accessible :closed_at }
-    it { should be_admin_accessible :created_at }
-    it { should be_admin_accessible :updated_at }
-
-    it { should_not be_admin_accessible :id }
+    it { should allow_mass_assignment_of(:finished).as(:admin) }
+    it { should allow_mass_assignment_of(:closed_at).as(:admin) }
+    it { should allow_mass_assignment_of(:created_at).as(:admin) }
+    it { should allow_mass_assignment_of(:updated_at).as(:admin) }
+    it { should allow_mass_assignment_of(:deadline).as(:admin) }
   end
 
 
