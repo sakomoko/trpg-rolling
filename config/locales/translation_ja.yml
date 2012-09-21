@@ -7,6 +7,7 @@ ja:
     session-rooms: "セッションルーム一覧"
     view-session: "セッションの詳細"
     applicants: "参加希望者"
+    create-session: "セッションの作成"
   buttons:
     create-session: "セッションを開催"
     create-static-room: "固定チャットルームを作成"
@@ -19,4 +20,15 @@ ja:
       comments: "コメント"
       participants: "参加キャラクター"
       applicants: "参加希望者"
-
+  mongoid:
+    models:
+      session: "セッション"
+    attributes:
+      session:
+        title: "タイトル"
+        description: "本文"
+        guidelines: "募集要項"
+        started_at: "開始予定日時"
+        finished_at: "終了予定日時"
+        closed_at: "終了日時"
+        deadline: "募集締め切り日時"

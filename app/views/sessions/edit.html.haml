@@ -1,7 +1,11 @@
-%h1 Editing session
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.editing-session"
+      %small= @world.name
 
 = render 'form'
 
-= link_to 'Show', [@session.world, @session]
-\|
-= link_to 'Back', world_sessions_path(@session.world)
