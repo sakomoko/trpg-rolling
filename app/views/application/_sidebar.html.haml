@@ -1,12 +1,12 @@
 .span3#sidebar
-  .wrap(data-spy="affix" data-offset-bottom="50")
+  .wrap
     %ul#world-sidebar.dropdown.nav.nav-tabs.nav-stacked
       %li
         %a(href="#{world_path(@world)}")
           %i.icon-home
           World Top
       %li.dropdown-submenu
-        %a(href="#{world_rooms_path(@world)}" class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#")
+        %a(href="#{world_rooms_path(@world)}")
           %i.icon-comment
           Chat Rooms
         %ul(class="dropdown-menu" role="menu" aria-labelledby="dLabel")
@@ -14,7 +14,7 @@
             %li
               = link_to room.title, room
       %li.dropdown-submenu
-        %a(href="#{world_sessions_path(@world)}" class="dropdown-toggle" id="dLabelSessions" role="button" data-toggle="dropdown" data-target="#")
+        %a(href="#{world_sessions_path(@world)}")
           %i.icon-file
           Sessions
           %span.badge.badge-info
