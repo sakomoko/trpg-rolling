@@ -46,6 +46,14 @@
     %th GameMaster
     %th Description
     %th StartedAt
-  = render @sessions
-
+  - @sessions.each do |session|
+    %tr
+      %td= link_to session.title, [@world, session]
+      %td
+        %i.icon.icon-user
+        = link_to session.game_master.name, session.game_master
+      %td= truncate session.description
+      %td
+        %i.icon.icon-time
+        = l session.started_at
 
