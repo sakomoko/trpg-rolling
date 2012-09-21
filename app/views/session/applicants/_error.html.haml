@@ -1,0 +1,6 @@
+.alert.alert-error
+  %a.close{href: "#", "data-dismiss" => "alert"} &times;
+  %h4.alert-heading Error
+  %ul
+    - @applicant.errors.full_messages.each do |msg|
+      %li= msg

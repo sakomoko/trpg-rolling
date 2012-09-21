@@ -39,22 +39,17 @@
   .well
     ~ markdown @session.description
 
-.form-actions
-  - if !@session.fix_applicant? && can?(:create, @applicant)
-    = link_to t('buttons.entry-session'), new_world_session_applicant_path(@session.world, @session), role: "button", class: "btn btn-primary", "data-toggle" => "modal", "data-target" => "#entry-modal"
-  = link_to 'Back', @session.world, class: "btn"
-
-
 %div(id="entry-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="entry-modal-label" aria-hidden="true" style="display: none;")
   .modal-header
     %button(type="button" class="close" data-dismiss="modal" aria-hidden="true")x
-    %h3#entry-modal-label Header
+    %h3#entry-modal-label
+      = t '.entry-session'
   .modal-body
   .modal-footer
     %button(class="btn" data-dismiss="modal" aria-hidden="true")Close
     %button(id="entry-button" class="btn btn-primary")Entry
 
-%h3 Listing Session Rooms
+%h3= t("general.session-rooms")
 
 %table.table.table-striped
   %tr
@@ -63,20 +58,29 @@
     %th CreatedAt
   = render @session.rooms
 
-- if @session.fix_applicant?
-  %h3= t'.entry-characters'
-  #characters
-    = render @session.applicants.approved
+%ul.nav.nav-tabs
+  %li.active= link_to t('.comments'), "#comments", "data-toggle" => "tab"
+  - if @session.fix_applicant?
+    %li= link_to t('.participants'), "#participants", "data-toggle" => "tab"
+  - else
+    %li= link_to t('.applicants'), "#applicants", "data-toggle" => "tab"
 
-- unless @session.fix_applicant?
-  %h3= t '.applicants'
-  #applicants
-    = render @session.applicants
+.tab-content
+  #comments.tab-pane.active
+    #comment_error
+    = simple_form_for [@session, @comment], :html => {class: "well form-inline"}, :remote => true do |f|
+      = f.input_field :body, placeholder: "Comment", class: "span7"
+      = f.button :submit, class: "btn-success", id: "new_comment_submit"
+    #comments-container
+      = render @session.comments.reverse
+  - if @session.fix_applicant?
+    #participants.tab-pane
+      = render @session.applicants.approved
+  - else
+    #applicants.tab-pane
+      - if !@session.fix_applicant? && can?(:create, @applicant)
+        #applicant-error
+        = link_to t('buttons.entry-session'), new_world_session_applicant_path(@session.world, @session), role: "button", class: "btn btn-success btn-block", "data-toggle" => "modal", "data-target" => "#entry-modal"
+      #applicants-container
+        = render @session.applicants
 
-%h3 Session Comments
-#comments
-  = render @session.comments
-#comment_error
-= simple_form_for [@session, @comment], :html => {class: "well form-inline"}, :remote => true do |f|
-  = f.input_field :body, placeholder: "Comment", class: "span9"
-  = f.button :submit, class: "btn-success", id: "new_comment_submit"

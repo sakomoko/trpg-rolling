@@ -2,6 +2,6 @@
   $("#comment_error").append('<%= j(render "error") %>')
   $("#comment_error").find(".alert").alert()
 <% else %>
-  $("#comments").append('<%= j(render(@comment)) %>')
+  $("#comments-container").prepend('<%= j(render(@comment)) %>')
   $("#comment_body").val("")
 <% end %>
