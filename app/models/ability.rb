@@ -37,7 +37,7 @@ class Ability
 
       #for Session::Applicant Ablity
       can :create, Session::Applicant do |applicant|
-        applicant.session.try(:user_joined?, user) && !applicant.session.try(:fix_applicant?)
+        applicant.session.world.try(:user_joined?, user) && !applicant.session.try(:fix_applicant?)
       end
       can :manage, Session::Applicant do |applicant|
         applicant.session.try(:owner) == user
