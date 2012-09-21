@@ -1,31 +1,41 @@
 
-- if can? :manage, @session
-  .pull-right
-    = link_to "Create Session Room", new_session_room_path(@session), class: "btn btn-primary"
-    = link_to 'Edit', edit_world_session_path(@session.world), class: "btn"
-    = link_to t('.edit-members'), edit_world_session_applicants_path(@world, @session), class: "btn"
+- content_for :sidebar do
+  = render "sidebar"
 
-%h2= @session.title
-%p= @session.world.name
+- if can? :manage, @session
+  .btn-group.pull-right.dropdown
+    %a(class="dropdown-toggle btn" data-toggle="dropdown" href="#")
+      Action
+      %span.caret
+    %ul(class="dropdown-menu" role="menu")
+      %li= link_to t(".create-session-room"), new_session_room_path(@session)
+      %li= link_to t("buttons.edit"), edit_world_session_path(@session.world)
+      %li= link_to t('.edit-members'), edit_world_session_applicants_path(@world, @session)
+
+- content_for :header do
+  .page-header
+    %h1
+      = @session.title
+      %small= @session.world.name
 
 %div.well
   %dl
-    %dt GameMaster
+    %dt= t('general.game-master')
     %dd
       %i.icon-user
       = link_to @session.game_master.name, @session.game_master
 
-    %dt StartedAt
+    %dt= t('general.estimated-time-start')
     %dd
       %i.icon-time
       = @session.started_at.to_s :db
-    %dt FinishdAt
+    %dt= t('general.estimated-time-finish')
     %dd
       %i.icon-time
       = @session.finished_at.to_s :db
 
     %dt
-      GuideLines
+      = t("general.guidelines")
       - if @session.public?
         %span.label.label-info
           Open

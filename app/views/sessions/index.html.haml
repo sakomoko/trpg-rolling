@@ -1,22 +1,11 @@
-%h1 Listing sessions
 
-%table.table.table-striped
-  %tr
-    %th Title
-    %th GameMaster
-    %th Description
-    %th StartedAt
+- content_for :sidebar do
+  = render "sidebar"
 
-  - @sessions.each do |session|
-    %tr
-      %td= link_to session.title, [session.world, session]
-      %td
-        %i.icon-user
-        = link_to session.game_master.name, session.game_master
-      %td= truncate session.description
-      %td
-        %i.icon-time
-        = session.started_at.to_s :db
+- content_for :header do
+  .page-header
+    %h1
+      = t "general.sessions"
+      %small= @world.name
 
-.form-actions
-  = link_to "Back", @world, class: "btn"
+= render @sessions

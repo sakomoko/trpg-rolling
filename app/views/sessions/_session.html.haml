@@ -1,9 +1,25 @@
-%tr
-  %td= link_to session.title, [session.world, session]
-  %td
-    %i.icon-user
-    = link_to session.game_master.name, session.game_master
-  %td= truncate session.description
-  %td
-    %i.icon-time
-    = session.started_at.to_s :db
+%article.session
+  %h3= session.title
+  .well
+    ~ markdown session.description
+    %p.info
+      %span
+        %i.icon.icon-user
+        = link_to session.game_master.name, session.game_master
+      |
+      %span
+        %i.icon.icon-time
+        = t 'general.estimated-time-start'
+        = l session.started_at
+      |
+      %span
+        = t 'general.deadline'
+        %i.icon.icon-stop
+        = session.deadline
+      |
+      %span
+        = t 'general.applicants'
+        %span.badge
+          = session.applicants.count
+    = link_to t('general.view-session'), [@world, session], class: "btn btn-block btn-info"
+%hr
