@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   # GET /sessions
   # GET /sessions.xml
   def index
-    @sessions = @world.sessions
+    @sessions = @world.sessions.playing
   end
 
   # GET /worlds/1/sessions/finished
