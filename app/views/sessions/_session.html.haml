@@ -1,5 +1,5 @@
 %article.session
-  %h3= session.title
+  %h3= link_to session.title, [@world, session]
   .well
     ~ markdown session.description
     %p.info
@@ -13,9 +13,9 @@
         = l session.started_at
       |
       %span
+        %i.icon.icon-ok
         = t 'general.deadline'
-        %i.icon.icon-stop
-        = session.deadline
+        = l session.deadline
       |
       %span
         = t 'general.applicants'

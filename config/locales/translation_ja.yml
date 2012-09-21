@@ -3,6 +3,7 @@ ja:
     game-master: "ゲームマスター"
     estimated-time-start: "開催予定日時"
     estimated-time-finish: "終了予定日時"
+    deadline: "募集締め切り日時"
     guidelines: "募集要項"
     session-rooms: "セッションルーム一覧"
     view-session: "セッションの詳細"
