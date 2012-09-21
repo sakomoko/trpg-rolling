@@ -1,0 +1,22 @@
+ja:
+  general:
+    game-master: "ゲームマスター"
+    estimated-time-start: "開催予定日時"
+    estimated-time-finish: "終了予定日時"
+    guidelines: "募集要項"
+    session-rooms: "セッションルーム一覧"
+    view-session: "セッションの詳細"
+    applicants: "参加希望者"
+  buttons:
+    create-session: "セッションを開催"
+    create-static-room: "固定チャットルームを作成"
+    join: "ワールドに参加"
+    edit: "編集"
+  sessions:
+    show:
+      create-session-room: "セッションルームを作成する"
+      edit-members: "参加者を選出する"
+      comments: "コメント"
+      participants: "参加キャラクター"
+      applicants: "参加希望者"
+
