@@ -1,4 +1,11 @@
-%h1 Listing rooms
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.rooms"
+      %small= @world.name
 
 %table.table.table-striped
   %tr

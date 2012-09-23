@@ -1,7 +1,10 @@
-%h1 Editing room
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.editing-room"
+      %small= @world.name
 
 = render 'form'
-
-= link_to 'Show', @room
-\|
-= link_to 'Back', rooms_path

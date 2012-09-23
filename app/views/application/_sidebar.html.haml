@@ -12,7 +12,7 @@
         %ul(class="dropdown-menu" role="menu" aria-labelledby="dLabel")
           - @world.rooms.static.opened.each do |room|
             %li
-              = link_to room.title, room
+              = link_to room.title, [@world, room]
       %li.dropdown-submenu
         %a(href="#{world_sessions_path(@world)}")
           %i.icon-file
@@ -69,10 +69,10 @@
                       %i.icon.icon-tag
                       = character.name
 
-
             - if can? :create, @world.characters.build
               %li
                 %a(href="#{new_world_character_path(@world)}")
                   %i.icon.icon-plus
                   Add New Character
+
 

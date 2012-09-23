@@ -1,94 +1,74 @@
 class RoomsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new, :edit, :create, :update, :destroy]
+  before_filter :authenticate_user!, :except => [:index, :closed, :show]
   load_resource :world
   load_resource :session
-  load_and_authorize_resource :room, :through => [:world, :session], :shallow => true
+  before_filter :load_world_and_parent
+  load_and_authorize_resource :room, :through => [:session, :world], :shallow => true
 
   respond_to :html, :json
 
-  # GET /rooms
-  # GET /rooms.json
   def index
-    if params[:session_id]
-      @session = Session.find(params[:session_id])
+    if @session
       @rooms = @session.rooms.desc :created_at
+    elsif @world
+      @rooms = @world.rooms.opened.desc :created_at
     else
-      @rooms = Room.all.desc :created_at
+      @rooms = @rooms.opened.desc :created_at
     end
-    respond_with @rooms
   end
 
-  # GET /rooms/closed
-  # GET /rooms/closed.json
   def closed
     @rooms = Room.closed.desc :created_at
     respond_with @rooms, template: "rooms/index"
   end
 
-  # GET /rooms/1
-  # GET /rooms/1.json
   def show
-    @room = Room.find(params[:id])
-    respond_with @room
   end
 
-  # GET /rooms/new
-  # GET /rooms/new.json
   def new
-    @room = Room.new
-    @room.static = true if params[:static]
-    @parent = Room.find_parent_model(params)
-    respond_with @room
   end
 
-  # GET /rooms/1/edit
   def edit
-    @room = Room.find(params[:id])
   end
 
-  # POST /rooms
-  # POST /rooms.json
   def create
-    @parent = Room.find_parent_model params
     @room = Room.create(params[:room]) do |r|
       r.user = current_user
       if @parent
         r.roomable = @parent
       end
     end
-    respond_with @room
+    redirect_to_parent
   end
 
-  # PUT /rooms/1
-  # PUT /rooms/1.json
   def update
-    @room = Room.find(params[:id])
+    @room.update_attributes(params[:room])
+    redirect_to_parent
+  end
 
-    respond_to do |format|
-      if @room.update_attributes(params[:room])
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+  def close
+    @room.closed = true
+    @room.save
+    redirect_to_parent
+  end
+
+  def destroy
+    @room.destroy
+    redirect_to_parent
+  end
+
+  private
+  def load_world_and_parent
+    @parent = Room.find_parent_model params
+    @world = @session.world if @world.nil? && @session
+  end
+
+  def redirect_to_parent
+    if @session
+      respond_with @room, :location => world_session_path(@world, @session)
+    else
+      respond_with @room, :location => world_path(@world)
     end
   end
 
-  # PUT /rooms/1/close
-  # PUT /rooms/1/close.json
-  def close
-    @room = Room.find(params[:id])
-    @room.closed = true
-    @room.save
-    respond_with @room
-  end
-
-  # DELETE /rooms/1
-  # DELETE /rooms/1.json
-  def destroy
-    @room = Room.find(params[:id])
-    @room.destroy
-    respond_with @room
-  end
 end
