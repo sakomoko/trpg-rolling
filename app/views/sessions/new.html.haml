@@ -1,5 +1,12 @@
-%h1 New session
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.create-session"
+      %small= @world.name
 
 = render 'form'
 
-= link_to 'Back', world_sessions_path
+
