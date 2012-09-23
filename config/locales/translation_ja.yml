@@ -25,6 +25,9 @@ ja:
     models:
       session: "セッション"
     attributes:
+      room:
+        title: "部屋名"
+        description: "概要"
       session:
         title: "タイトル"
         description: "本文"

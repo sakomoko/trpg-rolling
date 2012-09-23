@@ -1,4 +1,11 @@
-%h1 Listing Finished sessions
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.finished-sessions"
+      %small= @world.name
 
 %table.table.table-striped
   %tr
@@ -7,7 +14,14 @@
     %th Description
     %th StartedAt
 
-  = render @sessions
+  - @sessions.each do |session|
+    %tr
+      %td= link_to session.title, [@world, session]
+      %td
+        %i.icon.icon-user
+        = link_to session.game_master.name, session.game_master
+      %td= truncate session.description
+      %td
+        %i.icon.icon-time
+        = l session.started_at
 
-.form-actions
-  = link_to "Back", @world, class: "btn"
