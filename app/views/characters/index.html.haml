@@ -1,7 +1,14 @@
-%h1 Listing Characters
+- content_for :sidebar do
+  = render "sidebar"
 
-= render :file => "characters/#{@system_key}/index"
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.characters"
+      %small= @world.name
 
 .form-actions
   = link_to "Create New Character", new_world_character_path(@world), class: "btn btn-primary"
-  = link_to "Back", @world, class: "btn"
+
+= render :file => "characters/#{@system_key}/index"
+

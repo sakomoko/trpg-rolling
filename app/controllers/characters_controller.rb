@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
 
   def index
     @system_key = @world.game_system.system_key.underscore
-    @characters = @world.characters
+    @characters = @world.characters.to_a
     respond_with @world, @characters
   end
 

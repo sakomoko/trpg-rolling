@@ -12,9 +12,11 @@ describe CharactersController do
   describe "GET index" do
     subject { assigns :characters }
     before do
+      character
+      other_character
       get :index, world_id: world.to_param
     end
-    its(:to_a) { should eq [character, other_character] }
+    it { should eq [character, other_character] }
     it { assigns(:world).should eq character.world }
     it { assigns(:system_key).should eq game_system.system_key.underscore }
   end
