@@ -1,4 +1,11 @@
-%h1 Listing Members
+- content_for :sidebar do
+  = render "sidebar"
+
+- content_for :header do
+  .page-header
+    %h2
+      = t "general.members"
+      %small= @world.name
 
 %table.table.table-striped
   %tr
@@ -11,6 +18,3 @@
       %td= link_to member.user.name, [@world, member]
       %td Hoge
       %td Hoge
-
-.form-actions
-  = link_to "Back", @world, class: "btn"
