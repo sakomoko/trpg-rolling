@@ -9,10 +9,12 @@ describe Session::Applicant do
   describe "fields" do
     it { should have_field(:status).of_type(Symbol).with_default_value_of(:entry) }
     it { should have_field(:comment).of_type(String) }
+    it { should have_field(:version).of_type(Integer) }
   end
 
   describe "validations" do
     it { should validate_presence_of(:character_id) }
+    it { should validate_presence_of(:version) }
     it { should validate_inclusion_of(:status).to_allow([:entry, :approved]) }
   end
 
@@ -20,10 +22,12 @@ describe Session::Applicant do
     it { should allow_mass_assignment_of :comment }
     it { should_not allow_mass_assignment_of(:character_id) }
     it { should_not allow_mass_assignment_of(:status) }
+    it { should_not allow_mass_assignment_of(:version) }
 
     it { should allow_mass_assignment_of(:comment).as(:admin) }
     it { should allow_mass_assignment_of(:status).as(:admin) }
     it { should allow_mass_assignment_of(:character_id).as(:admin) }
+    it { should allow_mass_assignment_of(:version).as(:admin) }
   end
 
 end

@@ -13,9 +13,10 @@ class Session::ApplicantsController < ApplicationController
   def create
     @applicant = @session.applicants.new params[:session_applicant] do |m|
       m.character = current_user.characters.where(world: @world).find(params[:session_applicant][:character_id])
+      m.version = m.character.version
     end
     authorize! :create, @applicant
-    @applicant.save!
+    @applicant.save
   end
 
   def edit

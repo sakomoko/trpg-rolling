@@ -7,12 +7,13 @@ class Session::Applicant
 
   field :status, type: Symbol, default: :entry
   field :comment, type: String
+  field :version, type: Integer
 
-  validates_presence_of :character_id
+  validates_presence_of :character_id, :version
   validates_inclusion_of :status, in: [:entry, :approved]
 
   attr_accessible :comment
-  attr_accessible :comment, :character_id, :status, as: :admin
+  attr_accessible :comment, :character_id, :status, :version, as: :admin
 
   scope :approved, where(status: :approved)
 

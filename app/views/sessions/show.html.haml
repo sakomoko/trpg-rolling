@@ -59,6 +59,7 @@
     %h3#entry-modal-label
       = t '.entry-session'
   .modal-body
+  #applicant-error
   .modal-footer
     %button(class="btn" data-dismiss="modal" aria-hidden="true")Close
     %button(id="entry-button" class="btn btn-primary")Entry
@@ -93,7 +94,6 @@
   - else
     #applicants.tab-pane
       - if !@session.fix_applicant? && can?(:create, @applicant)
-        #applicant-error
         = link_to t('buttons.entry-session'), new_world_session_applicant_path(@session.world, @session), role: "button", class: "btn btn-success btn-block", "data-toggle" => "modal", "data-target" => "#entry-modal"
       #applicants-container
         = render @session.applicants
