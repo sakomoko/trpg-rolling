@@ -3,14 +3,18 @@
   = render "sidebar"
 
 - if can? :manage, @session
-  .btn-group.pull-right.dropdown
-    %a(class="dropdown-toggle btn" data-toggle="dropdown" href="#")
-      Action
-      %span.caret
-    %ul(class="dropdown-menu" role="menu")
-      %li= link_to t(".create-session-room"), new_session_room_path(@session)
-      %li= link_to t("buttons.edit"), edit_world_session_path(@session.world)
-      %li= link_to t('.edit-members'), edit_world_session_applicants_path(@world, @session)
+  .btn-toolbar
+    .btn-group.dropdown
+      %a(class="dropdown-toggle btn" data-toggle="dropdown" href="#")
+        Action
+        %span.caret
+      %ul(class="dropdown-menu" role="menu")
+        %li= link_to t(".create-session-room"), new_session_room_path(@session)
+        %li= link_to t("buttons.edit"), edit_world_session_path(@session.world)
+        %li= link_to t('.edit-members'), edit_world_session_applicants_path(@world, @session)
+    %a(href="#{world_session_path(@world, @session)}" data-method="delete" rel="nofollow" data-confirm="#{t('confirms.delete')}" class="btn btn-danger")
+      %i.icon.icon-trash.icon-white
+      = t("buttons.delete")
 
 - content_for :header do
   .page-header

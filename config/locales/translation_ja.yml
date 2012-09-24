@@ -14,6 +14,8 @@ ja:
     create-static-room: "固定チャットルームを作成"
     join: "ワールドに参加"
     edit: "編集"
+  confirms:
+    delete: "本当に削除してもよろしいですか？"
   sessions:
     show:
       create-session-room: "セッションルームを作成する"
