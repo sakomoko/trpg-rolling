@@ -2,6 +2,7 @@ require 'spec_helper'
 require "cancan/matchers"
 
 describe Character do
+  it { should be_versioned_document }
 
   describe "associations" do
     it { should belong_to(:user) }
