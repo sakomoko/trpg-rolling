@@ -1,5 +1,6 @@
 class GameSystem
   include Mongoid::Document
+  store_in collection: "games"
 
   has_many :characters
   has_many :worlds
